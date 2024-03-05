@@ -1062,3 +1062,11 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:scripting/monoscript/fileName/Player.cs: 007e2e63cbf915a2b71612a7f593548a -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 5007.985264 seconds.
+  path: Assets/Source/TerrainSource/Terrain
+  artifactKey: Guid(0bfed2a11c1886644bc582dc685ac63c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Source/TerrainSource/Terrain using Guid(0bfed2a11c1886644bc582dc685ac63c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd603dd0e478fb7890895f72f03953caa') in 0.003035 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
