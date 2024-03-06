@@ -382,7 +382,7 @@ public class Player1 : MonoBehaviour
     {
         if (other.gameObject.name == "Waters")
         {
-
+            
             isGround = true;
         }
         if (other.gameObject.name == "WaterForShark")

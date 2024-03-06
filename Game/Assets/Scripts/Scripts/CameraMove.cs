@@ -6,13 +6,14 @@ public class CameraMove : MonoBehaviour
 {
     private float speedForToHead = 10.0f;
     private float xRotate;
+    
     private float yRotate;
     [SerializeField] private float rotateSens;
     [SerializeField] GameObject targetObj;
     [SerializeField] GameObject headObj;
     [SerializeField] private GameObject capsule;
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = /*headObj.transform.position;*/ Vector3.Lerp(transform.position, headObj.transform.position, Time.deltaTime * speedForToHead);
         MouseRotate();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterPhysicsForPlaye : MonoBehaviour
+public class WaterPhysicsForPlayer : MonoBehaviour
 {
     
     public float floatUpSpeedLimit = 1.15f;
