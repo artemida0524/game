@@ -46,8 +46,8 @@ public class Player1 : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         animatorShark = shark.GetComponent<Animator>();
     }
 
