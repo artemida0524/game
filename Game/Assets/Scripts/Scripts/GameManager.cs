@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,10 +9,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private InventoryData inventoryData;
     [SerializeField] private GameObject mainCharacter;
+    [SerializeField] private GameObject mainMenu;
     private bool isActive = false;
 
     private void Update()
     {
+
+
+
         isActive = inventory.activeSelf;
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -20,14 +25,14 @@ public class GameManager : MonoBehaviour
 
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                mainCharacter.GetComponent<FPSController>().enabled = false;
+                //mainCharacter.GetComponent<FPSController>().enabled = false;
             }
             if (isActive)
             {
 
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-                mainCharacter.GetComponent<FPSController>().enabled = true;
+                //mainCharacter.GetComponent<FPSController>().enabled = true;
             }
 
             isActive = !isActive;
@@ -41,4 +46,15 @@ public class GameManager : MonoBehaviour
         //    PlayerPrefs.DeleteAll();
         //}
     }
+
+
+    public void SetMenu()
+    {
+        mainMenu.gameObject.SetActive(true);
+    }
+    public void OK()
+    {
+        mainMenu.gameObject.SetActive(false);
+    }
+
 }
