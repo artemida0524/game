@@ -54,7 +54,6 @@ public class Player1 : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(cameraFace1.enabled + " " + cameraFace3.enabled);
         if (Input.GetKeyDown(KeyCode.T))
         {
             SwitchCamera();
@@ -382,7 +381,6 @@ public class Player1 : MonoBehaviour
     {
         if (other.gameObject.name == "Waters")
         {
-            
             isGround = true;
         }
         if (other.gameObject.name == "WaterForShark")
