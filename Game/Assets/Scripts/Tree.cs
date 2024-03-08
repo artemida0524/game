@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class Tree : MonoBehaviour
 {
 
-    [SerializeField] private float time = 0.5f;
+    [SerializeField] private float time;
     private float timeUp = 0;
     [SerializeField] GameObject obj;
     private void Update()

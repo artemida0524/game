@@ -38,11 +38,6 @@ public class TakeObject : MonoBehaviour
 
     }
 
-    public void CursorEnable()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
 
     private void RayTake()
     {

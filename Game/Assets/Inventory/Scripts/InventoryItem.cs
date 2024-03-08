@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,11 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public Image image;
     [SerializeField] public TextMeshProUGUI textMeshProUGUI;
     [SerializeField] public InventoryView inventoryView;
-    [SerializeField] public GameObject target;
+    [SerializeField] public GameObject[] target;
     [SerializeField] public GameObject inventory;
     [SerializeField] public InventoryData data;
     [SerializeField] public TakeObject takeObject;
-    
+
     private ScriptableItem[] items;
 
 
@@ -26,7 +27,7 @@ public class InventoryItem : MonoBehaviour
         if (takeObject.objInhand == null)
         {
             TakeInHand();
-            
+
         }
         else
         {
@@ -52,18 +53,26 @@ public class InventoryItem : MonoBehaviour
             {
                 if (item.typeObject == TypeObject.Instrument)
                 {
-                    GameObject obj = Instantiate(item.gameObject, target.transform.position, target.transform.rotation);
+                    GameObject obj1 = Instantiate(item.gameObject, target[0].transform.position, item.gameObject.transform.rotation);
+                    GameObject obj2 = Instantiate(item.gameObject, target[1].transform.position, /*target[1].transform.rotation*/ item.gameObject.transform.rotation);
 
-                    obj.GetComponent<Rigidbody>().isKinematic = true;
 
-                    obj.transform.parent = target.transform;
+
+                    obj1.GetComponent<Rigidbody>().isKinematic = true;
+                    obj1.GetComponent<MeshCollider>().enabled = false;
+
+                    obj2.GetComponent<Rigidbody>().isKinematic = true;
+                    obj2.GetComponent<MeshCollider>().enabled = false;
+
+
+                    obj1.transform.parent = target[0].transform;
+
+                    obj2.transform.parent = target[1].transform;
+                    obj1.gameObject.layer = 0;
 
                     data.RemoveData(item.id, 1);
 
-
-                    takeObject.objInhand = obj;
-
-                    //takeObject.CursorEnable();
+                    takeObject.objInhand = obj1;
 
                     inventory.SetActive(false);
                 }
