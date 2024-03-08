@@ -14,7 +14,7 @@ public class TakeObject : MonoBehaviour
     public GameObject objInhand;
     Ray ray;
     [SerializeField] public Camera mainCamera;
-    float maxDistance = 10.0f;
+    float maxDistance = 5.0f;
     float force = 10f;
     public bool isTake = true;
 
@@ -22,7 +22,6 @@ public class TakeObject : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
 
     private void Update()
     {
@@ -32,25 +31,6 @@ public class TakeObject : MonoBehaviour
             RayTake();
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (Physics.Raycast(ray, out RaycastHit hitInfo))
-            {
-                if (inventoryData.inventory.ContainsKey("bear"))
-                {
-                    foreach (var item in inventoryData.subjects)
-                    {
-                        if (item.gameObject.GetComponent<ObjectData>().id == "bear")
-                        {
-                            Instantiate(item, hitInfo.point, Quaternion.identity);
-                            inventoryData.RemoveData("bear", 1);
-                        }
-
-                    }
-                }
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.G))
         {
             Drop();
@@ -58,24 +38,10 @@ public class TakeObject : MonoBehaviour
 
     }
 
-    public void CursorEnable(bool enable)
+    public void CursorEnable()
     {
-        //if(enable)
-        //{
-        //    Cursor.visible = enable;
-        //    if(enable)
-        //    {
-        //        Cursor.lockState = CursorLockMode.None;
-        //    }
-        //    if(!enable)
-        //    {
-        //        Cursor.lockState = CursorLockMode.Locked;
-        //    }
-        //}
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
     }
 
     private void RayTake()
@@ -85,7 +51,7 @@ public class TakeObject : MonoBehaviour
         {
             if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance))
             {
-                if (hitInfo.collider.gameObject.layer == 7)
+                if (hitInfo.collider.gameObject.layer == 3)
                 {
                     inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>());
                     Destroy(hitInfo.collider.gameObject);
@@ -93,10 +59,6 @@ public class TakeObject : MonoBehaviour
                     {
                         animator.SetTrigger("TakeObject");
                     }
-                    
-                }
-                if (hitInfo.collider.tag == "colliderTest")
-                {
                     
                 }
             }

@@ -12,7 +12,6 @@ public class Player1 : MonoBehaviour
     [SerializeField] private GameObject shark;
     [SerializeField] private GameObject bodySkeleton;
     [SerializeField] private CinemachineVirtualCamera cameraFace1;
-    [SerializeField] private CinemachineVirtualCamera cameraFace3;
 
 
     private Animator animatorShark;
@@ -40,20 +39,27 @@ public class Player1 : MonoBehaviour
     private bool forTurnLeft = true;
     private bool forTurnRight = true;
     private bool isGround = true;
+    private bool isBoxing = false;
 
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         animatorShark = shark.GetComponent<Animator>();
     }
 
 
     void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            isBoxing = !isBoxing;
+        }
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             SwitchCamera();
@@ -72,11 +78,13 @@ public class Player1 : MonoBehaviour
     }
     private void SwitchCamera()
     {
+
         if (cameraFace1.Priority == 11)
         {
             bodySkeleton.SetActive(true);
             cameraFace1.Priority = 9;
         }
+
         else if (cameraFace1.Priority == 9)
         {
             bodySkeleton.SetActive(false);
@@ -152,7 +160,7 @@ public class Player1 : MonoBehaviour
             gameObject.transform.position = new Vector3(160.987f, 9.925f, 396.836f);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isBoxing)
         {
 
             animator.SetTrigger("Boxing");
