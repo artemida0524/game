@@ -1,5 +1,5 @@
 using Cinemachine;
-
+using System;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
@@ -11,10 +11,16 @@ public class Player1 : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject shark;
     [SerializeField] private GameObject bodySkeleton;
-    [SerializeField] private CinemachineVirtualCamera cameraFace1;
+    [SerializeField] private CinemachineVirtualCamera cinemachineCameraFace1;
+    [SerializeField] private Camera cameraFrom3;
+    [SerializeField] private Camera cameraFrom1;
 
 
+
+
+    private TakeObject takeObject;
     private Animator animatorShark;
+    public Camera currentCamera;
 
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float speedForWalk = 1.0f;
@@ -49,6 +55,8 @@ public class Player1 : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         animatorShark = shark.GetComponent<Animator>();
+        currentCamera = cameraFrom1;
+        takeObject = GetComponent<TakeObject>(); 
     }
 
 
@@ -73,22 +81,33 @@ public class Player1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-
+            
         }
     }
     private void SwitchCamera()
     {
 
-        if (cameraFace1.Priority == 11)
+        if (cinemachineCameraFace1.Priority == 11)
         {
             bodySkeleton.SetActive(true);
-            cameraFace1.Priority = 9;
+            cinemachineCameraFace1.Priority = 9;
+            cameraFrom3.gameObject.SetActive(true);
+            cameraFrom1.gameObject.SetActive(false);
+
+            currentCamera = cameraFrom3;
+
+            takeObject.maxDistance = 5f;
         }
 
-        else if (cameraFace1.Priority == 9)
+        else if (cinemachineCameraFace1.Priority == 9)  
         {
+            
             bodySkeleton.SetActive(false);
-            cameraFace1.Priority = 11;
+            cinemachineCameraFace1.Priority = 11;
+            cameraFrom3.gameObject.SetActive(false);
+            cameraFrom1.gameObject.SetActive(true);
+            currentCamera = cameraFrom1;
+            takeObject.maxDistance = 2f;
         }
 
     }
@@ -256,7 +275,6 @@ public class Player1 : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && isRun)
         {
-
 
             forTurnLeft = false;
             forTurnRight = false;

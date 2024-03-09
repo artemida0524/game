@@ -10,11 +10,11 @@ public class TakeObject : MonoBehaviour
 {
     [SerializeField] InventoryData inventoryData;
     Animator animator;
-    [SerializeField] GameObject target;
-    public GameObject objInhand;
+    public GameObject objInHand1;
+    public GameObject objInHand2;
     Ray ray;
-    [SerializeField] public Camera mainCamera;
-    float maxDistance = 5.0f;
+    [SerializeField] public Camera currentCamera;
+    public float maxDistance = 2.0f;
     float force = 10f;
     public bool isTake = true;
 
@@ -25,8 +25,12 @@ public class TakeObject : MonoBehaviour
 
     private void Update()
     {
-        ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-        if (objInhand == null)
+
+        Debug.Log(isTake + " " + objInHand1);
+
+        currentCamera = GetComponent<Player1>().currentCamera;
+        ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
+        if (objInHand1 == null && isTake)
         {
             RayTake();
         }
@@ -35,6 +39,8 @@ public class TakeObject : MonoBehaviour
         {
             Drop();
         }
+
+        
 
     }
 
@@ -55,20 +61,27 @@ public class TakeObject : MonoBehaviour
                         animator.SetTrigger("TakeObject");
                     }
                     
-                }
+                }   
             }
         }
     }
 
     public void Drop()
     {
-        if(objInhand != null)
+        if(objInHand1 != null)
         {
-            objInhand.transform.parent = null;
-            objInhand.GetComponent<Rigidbody>().isKinematic = false;
+            
+            objInHand1.transform.parent = null;
+            objInHand1.GetComponent<Rigidbody>().isKinematic = false;
 
-            objInhand.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
-            objInhand = null;
+            objInHand1.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
+            objInHand1.GetComponent<MeshCollider>().enabled = true;
+
+            objInHand1.gameObject.layer = 3;    
+
+            Destroy(objInHand2);
+            objInHand1 = null;
+            isTake = true;
         }
     }
 }

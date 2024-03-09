@@ -5,7 +5,8 @@ public enum TypeObject
 {
     Weapon,
     Food,
-    Instrument
+    Instrument,
+    Resource
 }
 
 

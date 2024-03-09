@@ -50,7 +50,7 @@ public class Shark : MonoBehaviour
 
         if (distance >= 3)
         {
-            transform.Translate(new Vector3(0, 0, 3) * Time.deltaTime);
+            transform.Translate(new Vector3(0, 0, 10) * Time.deltaTime);
         }
 
     }

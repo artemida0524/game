@@ -94,7 +94,9 @@ MonoBehaviour:
   image: {fileID: 1218833804586280031}
   textMeshProUGUI: {fileID: 3087580855459559337}
   inventoryView: {fileID: 0}
-  target: {fileID: 0}
+  target:
+  - {fileID: 0}
+  - {fileID: 0}
   inventory: {fileID: 0}
   data: {fileID: 0}
   takeObject: {fileID: 0}
@@ -294,9 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

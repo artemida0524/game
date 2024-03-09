@@ -1,4 +1,5 @@
 using Cinemachine.Utility;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,10 @@ public class Tree : MonoBehaviour
 {
 
     [SerializeField] private float time;
+    [SerializeField] private GameObject wood;
+
+    [SerializeField] public float hp;
+
     private float timeUp = 0;
     [SerializeField] GameObject obj;
     private void Update()
@@ -22,10 +27,26 @@ public class Tree : MonoBehaviour
             vector3.y += Random.Range(3f, 6.0f);
             vector3.z += Random.Range(-4.0f, 4.0f);
             timeUp = 0;
-            GameObject app =  Instantiate(obj, vector3, Quaternion.identity);
+            Instantiate(obj, vector3, Quaternion.identity);
 
-            
+
 
         }
     }
+
+    public void Chop()
+    {
+        hp -= 3;
+        if (hp <= 0)
+        {
+
+            GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
+
+            obj.transform.position += new Vector3(0,1,0);
+
+            Destroy(gameObject);
+        }
+    }
+
+
 }

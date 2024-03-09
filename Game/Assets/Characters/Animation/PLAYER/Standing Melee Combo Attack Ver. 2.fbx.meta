@@ -1,0 +1,398 @@
+fileFormatVersion: 2
+guid: 6a69f3a542a29514e8855dc6b358a693
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Standing Melee Combo Attack Ver. 2(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_Reference
+      parentName: Standing Melee Combo Attack Ver. 2(Clone)
+      position: {x: -0.10163383, y: -0.2022219, z: -0.02572756}
+      rotation: {x: 0.050788403, y: 0.42273766, z: -0.047103245, w: 0.903601}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_Hips
+      parentName: Skeleton_Standard_Brave_Series_Reference
+      position: {x: -0.009229794, y: 1.2166959, z: -0.07135528}
+      rotation: {x: -0.050788376, y: -0.42273766, z: 0.04710325, w: 0.903601}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftUpLeg
+      parentName: Skeleton_Standard_Brave_Series_Hips
+      position: {x: -0.20439593, y: -0.06270004, z: 0.013566205}
+      rotation: {x: 0.000000018626451, y: -0, z: 0.0000000037252903, w: 1}
+      scale: {x: 1.0000004, y: 1.0000001, z: 0.9999999}
+    - name: Skeleton_Standard_Brave_Series_LeftLeg
+      parentName: Skeleton_Standard_Brave_Series_LeftUpLeg
+      position: {x: -0.001618037, y: -0.38255242, z: 0.017717239}
+      rotation: {x: -0.000000014901161, y: -0.000000029802319, z: -0.0000000018626448, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftFoot
+      parentName: Skeleton_Standard_Brave_Series_LeftLeg
+      position: {x: -0.004591546, y: -0.43239525, z: -0.052150488}
+      rotation: {x: -0.0000007003545, y: 1.7763566e-15, z: 0.000000007450601, w: 1}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Skeleton_Standard_Brave_Series_LeftToeBase
+      parentName: Skeleton_Standard_Brave_Series_LeftFoot
+      position: {x: -0.012802142, y: -0.1072631, z: 0.24953154}
+      rotation: {x: -0, y: -0, z: 1.2440794e-21, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftToeBase_End
+      parentName: Skeleton_Standard_Brave_Series_LeftToeBase
+      position: {x: 0.0034232996, y: -0.000025469273, z: 0.21976532}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_Spine
+      parentName: Skeleton_Standard_Brave_Series_Hips
+      position: {x: 2.3283063e-11, y: 0.13267913, z: -0.07643184}
+      rotation: {x: 0.000000026077032, y: -0, z: 0.0000000037252903, w: 1}
+      scale: {x: 1.0000004, y: 1, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_Spine1
+      parentName: Skeleton_Standard_Brave_Series_Spine
+      position: {x: -0, y: 0.1340992, z: 0.010307607}
+      rotation: {x: -0.000000029802322, y: -8.326673e-17, z: -0.000000007450581, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_Spine2
+      parentName: Skeleton_Standard_Brave_Series_Spine1
+      position: {x: -2.3283063e-11, y: 0.15070197, z: 0.020297222}
+      rotation: {x: 0.000000026077032, y: 0.000000059604645, z: -0.0000000037252903, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftShoulder
+      parentName: Skeleton_Standard_Brave_Series_Spine2
+      position: {x: -0.04338156, y: -0.030536652, z: 0.19629997}
+      rotation: {x: -0.000000027075004, y: 0.13912421, z: 0.06633359, w: 0.9880508}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftArm
+      parentName: Skeleton_Standard_Brave_Series_LeftShoulder
+      position: {x: -0.22590762, y: 0.07047684, z: -0.14781414}
+      rotation: {x: 0.005666191, y: -0.11132021, z: -0.072699115, w: 0.9911058}
+      scale: {x: 1, y: 1.0000004, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftForeArm
+      parentName: Skeleton_Standard_Brave_Series_LeftArm
+      position: {x: -0.41521135, y: -0.02175671, z: 0.0009622729}
+      rotation: {x: -0.0000000632823, y: -0.0000025331974, z: -0.000033915043, w: 1}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftHand
+      parentName: Skeleton_Standard_Brave_Series_LeftForeArm
+      position: {x: -0.31412652, y: -0.003419345, z: 0.0007295823}
+      rotation: {x: 0.00000005215426, y: 0.000000029802322, z: 0.00002568774, w: 1}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftHandThumb1
+      parentName: Skeleton_Standard_Brave_Series_LeftHand
+      position: {x: -0.073141225, y: 0.0015199594, z: 0.064293906}
+      rotation: {x: 0.05662637, y: 0.40934977, z: 0.05247251, w: 0.90910554}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftHandThumb2
+      parentName: Skeleton_Standard_Brave_Series_LeftHandThumb1
+      position: {x: -0.1361762, y: 0.0000000053781957, z: 0.000000010102042}
+      rotation: {x: -0.1444465, y: -0.03360261, z: 0.0031817837, w: 0.9889368}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000002}
+    - name: Skeleton_Standard_Brave_Series_LeftHandThumb3
+      parentName: Skeleton_Standard_Brave_Series_LeftHandThumb2
+      position: {x: -0.17496522, y: 0.000000011628194, z: 0.000000021038879}
+      rotation: {x: -0.0819458, y: -0.24231307, z: -0.30970973, w: 0.9157779}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftHandIndex1
+      parentName: Skeleton_Standard_Brave_Series_LeftHand
+      position: {x: -0.20609728, y: -0.0075441757, z: 0.05263962}
+      rotation: {x: 0.018649133, y: 0.08031517, z: 0.03280036, w: 0.9960552}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftHandIndex2
+      parentName: Skeleton_Standard_Brave_Series_LeftHandIndex1
+      position: {x: -0.109178014, y: 0.0000000057222937, z: 0.000000011792383}
+      rotation: {x: -0.012290965, y: -0.007362286, z: 0.034339342, w: 0.9993075}
+      scale: {x: 1.0000004, y: 1.0000001, z: 0.99999994}
+    - name: Skeleton_Standard_Brave_Series_LeftHandIndex3
+      parentName: Skeleton_Standard_Brave_Series_LeftHandIndex2
+      position: {x: -0.15604302, y: 0.000000008437098, z: 0.000000014078658}
+      rotation: {x: -0.039250676, y: -0.15473048, z: -0.2427248, w: 0.9568713}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftHandMiddle1
+      parentName: Skeleton_Standard_Brave_Series_LeftHand
+      position: {x: -0.2103265, y: -0.0027997058, z: 0.0037035125}
+      rotation: {x: -0.00041446424, y: -0.014883037, z: 0.027821457, w: 0.99950206}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftHandMiddle2
+      parentName: Skeleton_Standard_Brave_Series_LeftHandMiddle1
+      position: {x: -0.109334655, y: 0.0012081361, z: -0.00028337789}
+      rotation: {x: -0.0069392463, y: -0.004566043, z: 0.033554845, w: 0.99940234}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_LeftHandMiddle3
+      parentName: Skeleton_Standard_Brave_Series_LeftHandMiddle2
+      position: {x: -0.15640554, y: 0.001785128, z: -0.00068106875}
+      rotation: {x: 0.010035481, y: 0.04514768, z: -0.21675315, w: 0.97513026}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_LeftHandRing1
+      parentName: Skeleton_Standard_Brave_Series_LeftHand
+      position: {x: -0.2042469, y: 0.00562917, z: -0.06254852}
+      rotation: {x: -0.021140646, y: -0.06117918, z: 0.034907214, w: 0.9972922}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000002}
+    - name: Skeleton_Standard_Brave_Series_LeftHandRing2
+      parentName: Skeleton_Standard_Brave_Series_LeftHandRing1
+      position: {x: -0.100866705, y: 0.0012710349, z: -0.00024385277}
+      rotation: {x: 0.00857529, y: 0.0043222904, z: 0.03420022, w: 0.99936885}
+      scale: {x: 1.0000004, y: 1, z: 0.99999994}
+    - name: Skeleton_Standard_Brave_Series_LeftHandRing3
+      parentName: Skeleton_Standard_Brave_Series_LeftHandRing2
+      position: {x: -0.14607656, y: 0.0018318287, z: -0.0004038022}
+      rotation: {x: 0.054337766, y: 0.19804536, z: -0.25895226, w: 0.9438057}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_Neck
+      parentName: Skeleton_Standard_Brave_Series_Spine2
+      position: {x: 0.0000000033527612, y: 0.14505218, z: 0.041789412}
+      rotation: {x: -0.4279307, y: 0.56291676, z: -0.4279307, w: 0.5629169}
+      scale: {x: 1.0000005, y: 1, z: 1.0000004}
+    - name: Skeleton_Standard_Brave_Series_Head
+      parentName: Skeleton_Standard_Brave_Series_Neck
+      position: {x: -0.23378713, y: 0.000000012299099, z: -3.4844566e-16}
+      rotation: {x: 0.4279307, y: -0.56291676, z: 0.42793068, w: 0.5629169}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.99999994}
+    - name: Skeleton_Standard_Brave_Series_Head_End
+      parentName: Skeleton_Standard_Brave_Series_Head
+      position: {x: -0.00000008346285, y: 0.29634026, z: 0.06993116}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightShoulder
+      parentName: Skeleton_Standard_Brave_Series_Spine2
+      position: {x: 0.04338156, y: -0.030540314, z: 0.1962997}
+      rotation: {x: 0.9880504, y: -0.06633686, z: 0.13912492, w: 0.000000020819394}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightArm
+      parentName: Skeleton_Standard_Brave_Series_RightShoulder
+      position: {x: 0.2259074, y: -0.07048004, z: 0.14781389}
+      rotation: {x: 0.005666561, y: -0.111323126, z: -0.07270493, w: 0.99110496}
+      scale: {x: 0.9999998, y: 1.0000005, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_RightForeArm
+      parentName: Skeleton_Standard_Brave_Series_RightArm
+      position: {x: 0.41521153, y: 0.021759361, z: -0.0009638381}
+      rotation: {x: 0.000000027951062, y: -0.0000005974439, z: -0.000032100823, w: 1}
+      scale: {x: 1.0000004, y: 1.0000001, z: 0.99999994}
+    - name: Skeleton_Standard_Brave_Series_RightHand
+      parentName: Skeleton_Standard_Brave_Series_RightForeArm
+      position: {x: 0.3141269, y: 0.0034221278, z: -0.0007296311}
+      rotation: {x: -0.00000005215369, y: -0.000000013970066, z: 0.00002564117, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_RightHandThumb1
+      parentName: Skeleton_Standard_Brave_Series_RightHand
+      position: {x: 0.07314298, y: -0.0015210191, z: -0.064293906}
+      rotation: {x: -0.04612187, y: 0.40084076, z: 0.09823812, w: 0.90969706}
+      scale: {x: 1, y: 1.0000004, z: 1.0000002}
+    - name: Skeleton_Standard_Brave_Series_RightHandThumb2
+      parentName: Skeleton_Standard_Brave_Series_RightHandThumb1
+      position: {x: 0.13617861, y: -0.0000003198182, z: 0.0000021024682}
+      rotation: {x: -0.03214729, y: -0.03375941, z: -0.00061740534, w: 0.9989127}
+      scale: {x: 0.99999994, y: 1.0000002, z: 1.0000004}
+    - name: Skeleton_Standard_Brave_Series_RightHandThumb3
+      parentName: Skeleton_Standard_Brave_Series_RightHandThumb2
+      position: {x: 0.17495812, y: -0.0000024539336, z: -0.0000020118327}
+      rotation: {x: -0.0819458, y: -0.24231307, z: -0.30970973, w: 0.9157779}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightHandIndex1
+      parentName: Skeleton_Standard_Brave_Series_RightHand
+      position: {x: 0.20609307, y: 0.0075373333, z: -0.05263962}
+      rotation: {x: 0.018651862, y: 0.080313124, z: 0.032778926, w: 0.99605596}
+      scale: {x: 1.0000004, y: 0.99999994, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_RightHandIndex2
+      parentName: Skeleton_Standard_Brave_Series_RightHandIndex1
+      position: {x: 0.1091797, y: 0.000005447639, z: 0.00000035682314}
+      rotation: {x: 0.039400335, y: -0.0055755074, z: 0.034706667, w: 0.998605}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_RightHandIndex3
+      parentName: Skeleton_Standard_Brave_Series_RightHandIndex2
+      position: {x: 0.1560463, y: -0.0000016218668, z: 0.0000015101357}
+      rotation: {x: -0.088678345, y: -0.16707486, z: -0.23439889, w: 0.9535614}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightHandMiddle1
+      parentName: Skeleton_Standard_Brave_Series_RightHand
+      position: {x: 0.21032299, y: 0.0027972886, z: -0.0037035188}
+      rotation: {x: -0.005119771, y: -0.0150138205, z: 0.027751116, w: 0.99948907}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: Skeleton_Standard_Brave_Series_RightHandMiddle2
+      parentName: Skeleton_Standard_Brave_Series_RightHandMiddle1
+      position: {x: 0.10933924, y: -0.0012080891, z: 0.00027194127}
+      rotation: {x: -0.012007806, y: -0.0050502983, z: 0.03349827, w: 0.99935395}
+      scale: {x: 1.0000008, y: 1.0000001, z: 1.000001}
+    - name: Skeleton_Standard_Brave_Series_RightHandMiddle3
+      parentName: Skeleton_Standard_Brave_Series_RightHandMiddle2
+      position: {x: 0.15640275, y: -0.0017983057, z: 0.0006462274}
+      rotation: {x: 0.019570753, y: 0.047265142, z: -0.2163013, w: 0.97498554}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightHandRing1
+      parentName: Skeleton_Standard_Brave_Series_RightHand
+      position: {x: 0.20424294, y: -0.005632656, z: 0.06254898}
+      rotation: {x: -0.082146734, y: -0.063222215, z: 0.03111296, w: 0.9941262}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000004}
+    - name: Skeleton_Standard_Brave_Series_RightHandRing2
+      parentName: Skeleton_Standard_Brave_Series_RightHandRing1
+      position: {x: 0.100871764, y: -0.0012963803, z: 0.00008258237}
+      rotation: {x: -0.012753068, y: -0.00060244644, z: 0.03443989, w: 0.9993253}
+      scale: {x: 1, y: 1, z: 1.0000002}
+    - name: Skeleton_Standard_Brave_Series_RightHandRing3
+      parentName: Skeleton_Standard_Brave_Series_RightHandRing2
+      position: {x: 0.14607303, y: -0.0018727493, z: 0.00009913365}
+      rotation: {x: 0.13201748, y: 0.21873404, z: -0.24173054, w: 0.9361053}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightUpLeg
+      parentName: Skeleton_Standard_Brave_Series_Hips
+      position: {x: 0.20439595, y: -0.062699966, z: 0.013566205}
+      rotation: {x: 1, y: -0.000000009313225, z: -0.0000000013969838, w: 0.000000014901159}
+      scale: {x: 1.0000001, y: 1, z: 0.9999999}
+    - name: Skeleton_Standard_Brave_Series_RightLeg
+      parentName: Skeleton_Standard_Brave_Series_RightUpLeg
+      position: {x: 0.0016184568, y: 0.38255584, z: -0.017641593}
+      rotation: {x: 0.00000004097819, y: 0.0000000025611364, z: 0.000000013038514, w: 1}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: Skeleton_Standard_Brave_Series_RightFoot
+      parentName: Skeleton_Standard_Brave_Series_RightLeg
+      position: {x: 0.004591001, y: 0.43239498, z: 0.052150447}
+      rotation: {x: -0.00000062398607, y: -0.00000003958119, z: -0.000000026077029, w: 1}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
+    - name: Skeleton_Standard_Brave_Series_RightToeBase
+      parentName: Skeleton_Standard_Brave_Series_RightFoot
+      position: {x: 0.012802015, y: 0.1072635, z: -0.2495319}
+      rotation: {x: 0.000000035390254, y: 0.000000032130625, z: -0.0000000018626265, w: 1}
+      scale: {x: 1, y: 1.0000006, z: 1.0000005}
+    - name: Skeleton_Standard_Brave_Series_RightToeBase_End
+      parentName: Skeleton_Standard_Brave_Series_RightToeBase
+      position: {x: -0.0034230016, y: 0.00002544393, z: -0.219765}
+      rotation: {x: 1, y: -0.0000000157601, z: -5.631365e-16, w: 0.000000035731787}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_Skeleton_Standard_Brave_Series
+      parentName: Standing Melee Combo Attack Ver. 2(Clone)
+      position: {x: 0.000000001602138, y: -3.4300282e-10, z: -0.0000000036289052}
+      rotation: {x: -0.7071068, y: -1.6813044e-16, z: -2.5987775e-17, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryView : MonoBehaviour
 {
-    [SerializeField] InventoryData inventoryData;
+    [SerializeField] public InventoryData inventoryData;
     [SerializeField] GameObject panel;
     [SerializeField] private InventoryItem[] inventoryItems;
     [SerializeField] public ScriptableItem[] scriptableItems;
@@ -13,11 +13,14 @@ public class InventoryView : MonoBehaviour
     private Color color1 = new Color(255, 255, 255, 255);
     private Color color2 = new Color(255, 255, 255, 0);
 
+
+
+
     private void OnEnable()
     {   
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        //mainCharacter.GetComponent<FPSController>().enabled = false;
+        //mainCharacter.GetComponent<Player1>().enabled = false;
         inventoryItems = GetComponentsInChildren<InventoryItem>();
         int iter = 0;
         foreach (var item in inventoryData.inventory)
@@ -44,11 +47,11 @@ public class InventoryView : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //mainCharacter.GetComponent<FPSController>().enabled = true;
+        //mainCharacter.GetComponent<Player1>().enabled = true;
         foreach (var item in inventoryItems)
         {
             item.image.color = color2;
-            item.textMeshProUGUI.text = null;
+            item.textMeshProUGUI.text = "";
         }
     }
 }

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oak_tree3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 95e30b3d340bc2b43b08db538d847c0e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95e30b3d340bc2b43b08db538d847c0e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.52268
@@ -30,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95e30b3d340bc2b43b08db538d847c0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.8
+      value: 13.48
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95e30b3d340bc2b43b08db538d847c0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -92,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6310c4a4c5c818f45a64133382278b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 2
+  time: 5
+  wood: {fileID: 1412445599507680912, guid: a88fd48456f48d34faa684d8fe62a76c, type: 3}
+  hp: 20
   obj: {fileID: 6169181730790054320, guid: 76e7a724af66a52488b4dda9dbdb2a2a, type: 3}
 --- !u!136 &7246062763995610618
 CapsuleCollider:
