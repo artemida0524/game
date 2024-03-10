@@ -26,8 +26,6 @@ public class TakeObject : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(isTake + " " + objInHand1);
-
         currentCamera = GetComponent<Player1>().currentCamera;
         ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
         if (objInHand1 == null && isTake)
@@ -76,6 +74,7 @@ public class TakeObject : MonoBehaviour
 
             objInHand1.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
             objInHand1.GetComponent<MeshCollider>().enabled = true;
+            objInHand1.GetComponent<Animator>().enabled = false;
 
             objInHand1.gameObject.layer = 3;    
 

@@ -15,7 +15,7 @@ public class WaterPhysicsForPlayer : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (other.gameObject.layer == 4)
+        if (other.gameObject.name == "WaterForPlayer")
         {
 
             float difference = (other.transform.position.y - transform.position.y) * floatUpSpeed;

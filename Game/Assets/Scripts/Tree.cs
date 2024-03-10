@@ -12,11 +12,20 @@ public class Tree : MonoBehaviour
 
     [SerializeField] private float time;
     [SerializeField] private GameObject wood;
+    [SerializeField] private GameObject tree;
+    private Animator animator;
 
-    [SerializeField] public float hp;
+    public float hp;
 
     private float timeUp = 0;
     [SerializeField] GameObject obj;
+
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         timeUp += Time.deltaTime;
@@ -37,16 +46,18 @@ public class Tree : MonoBehaviour
     public void Chop()
     {
         hp -= 3;
+        animator.SetTrigger("Chop");
         if (hp <= 0)
         {
-
+            hp = 20;
             GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
+            obj.transform.position += new Vector3(0, 1, 0);
 
-            obj.transform.position += new Vector3(0,1,0);
+            
+            Instantiate(transform.parent, new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f)), Quaternion.identity);
+            
 
-            Destroy(gameObject);
+            Destroy(tree);
         }
     }
-
-
 }

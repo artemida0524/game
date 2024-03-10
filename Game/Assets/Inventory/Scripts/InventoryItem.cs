@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.Mathematics;
@@ -15,9 +16,9 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public GameObject inventory;
     [SerializeField] public InventoryData data;
     [SerializeField] public TakeObject takeObject;
+    [SerializeField] private GameManager gameManager;
 
     private ScriptableItem[] items;
-
 
     private void Start()
     {
@@ -40,7 +41,8 @@ public class InventoryItem : MonoBehaviour
                 takeObject.objInHand2 = null;
                 takeObject.isTake = true;
                 inventory.SetActive(false);
-
+                gameManager.lastObject = null;
+                gameManager.viewObjectInHand = false;
             }
         }
         
@@ -85,6 +87,10 @@ public class InventoryItem : MonoBehaviour
                     obj1.GetComponent<Rigidbody>().isKinematic = true;
 
                     obj1.GetComponent<MeshCollider>().enabled = false;
+
+                    gameManager.lastObject = item.gameObject;
+                    gameManager.viewObjectInHand = true;
+
 
                     obj2.GetComponent<Rigidbody>().isKinematic = true;
                     obj2.GetComponent<MeshCollider>().enabled = false;
