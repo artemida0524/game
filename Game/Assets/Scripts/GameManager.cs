@@ -126,14 +126,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Take()
+    {
+        takeObject.isTake = true;
+    }
+
 
     public void SetMenu()
     {
         mainMenu.gameObject.SetActive(true);
     }
-    public void OK()
+    public void OK(GameObject canvas)
     {
-        mainMenu.gameObject.SetActive(false);
+        canvas.gameObject.SetActive(false);
     }
 
 }

@@ -10,7 +10,7 @@ public class Stone : MonoBehaviour
     [SerializeField] private GameObject stone;
     private Animator animator;
 
-    [SerializeField] public float hp;
+    public float hp;
 
 
 
@@ -25,6 +25,7 @@ public class Stone : MonoBehaviour
         animator.SetTrigger("shake");
         if (hp <= 0)
         {
+            hp = 20;
             for (int i = 0; i < 5; i++)
             {
                 GameObject obj = Instantiate(stone, transform.position, Quaternion.identity);

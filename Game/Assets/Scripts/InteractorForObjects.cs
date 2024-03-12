@@ -42,7 +42,7 @@ public class InteractorForObjects : MonoBehaviour
                                 {
                                     animator.SetTrigger("Chop");
                                 }
-                                if(item.id == "pickaxe")
+                                if (item.id == "pickaxe")
                                 {
                                     animator.SetTrigger("PickAxe");
                                 }
@@ -79,8 +79,6 @@ public class InteractorForObjects : MonoBehaviour
 
                                     if (hit.collider.gameObject.layer == 9 && item.id == "pickaxe")
                                     {
-                                        
-
                                         hit.collider.GetComponent<Stone>().Bam();
 
                                         if (hit.collider.GetComponent<Stone>().hp <= 0)

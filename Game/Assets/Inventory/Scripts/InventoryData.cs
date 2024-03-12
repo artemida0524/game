@@ -13,6 +13,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
+
+
+
 [Serializable]
 public class InventoryDto
 {
@@ -39,11 +42,13 @@ public class InventoryData : MonoBehaviour
 
     public Dictionary<string, ObjectData> inventory = new Dictionary<string, ObjectData>();
     [SerializeField] public List<GameObject> subjects = new List<GameObject>();
-    
+    float timeOut = 1f;
+    float time = 0f;
+
 
     private void Start()
     {
-        
+
         if (PlayerPrefs.HasKey(INVENTORY_PATH))
         {
 
@@ -56,12 +61,39 @@ public class InventoryData : MonoBehaviour
                 inventory[item.id] = new ObjectData(item.count, item.id);
             }
 
-            
+
 
 
             File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
         }
 
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time > timeOut)
+        {
+            UpdateData();
+            time = 0f;
+        }
+    }
+
+    public void UpdateData()
+    {
+        InventoryDtoList list = new InventoryDtoList();
+        list.data = new InventoryDto[inventory.Count];
+        int iter = 0;
+        foreach (var item in inventory)
+        {
+            list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
+            iter++;
+
+        }
+
+        string json = JsonUtility.ToJson(list);
+        PlayerPrefs.SetString(INVENTORY_PATH, json);
+        File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
     }
 
     public void AddData(string key, ObjectData data)
@@ -73,48 +105,48 @@ public class InventoryData : MonoBehaviour
 
 
 
-            InventoryDtoList list = new InventoryDtoList();
-            list.data = new InventoryDto[inventory.Count];
-            int iter = 0;
+            //InventoryDtoList list = new InventoryDtoList();
+            //list.data = new InventoryDto[inventory.Count];
+            //int iter = 0;
 
-            foreach (var item in inventory)
-            {
+            //foreach (var item in inventory)
+            //{
 
-                list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
-                iter++;
-                string json = JsonUtility.ToJson(list);
-
-
-                PlayerPrefs.SetString(INVENTORY_PATH, json);
-                File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
+            //    list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
+            //    iter++;
+            //    string json = JsonUtility.ToJson(list);
 
 
-            }
+            //    PlayerPrefs.SetString(INVENTORY_PATH, json);
+            //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
+
+
+            //}
 
         }
         else
         {
             inventory.Add(key, data);
-            
-
-            InventoryDtoList list = new InventoryDtoList();
-            list.data = new InventoryDto[inventory.Count];
-
-            int iter = 0;
-
-            foreach (var item in inventory)
-            {
-
-                list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
-                iter++;
-                string json = JsonUtility.ToJson(list);
 
 
-                PlayerPrefs.SetString(INVENTORY_PATH, json);
+            //InventoryDtoList list = new InventoryDtoList();
+            //list.data = new InventoryDto[inventory.Count];
 
-                File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
+            //int iter = 0;
 
-            }
+            //foreach (var item in inventory)
+            //{
+
+            //    list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
+            //    iter++;
+            //    string json = JsonUtility.ToJson(list);
+
+
+            //    PlayerPrefs.SetString(INVENTORY_PATH, json);
+
+            //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
+
+            //}
 
 
         }
@@ -125,7 +157,7 @@ public class InventoryData : MonoBehaviour
     {
         if (inventory.ContainsKey(key))
         {
-            if(inventory[key].count >= count)
+            if (inventory[key].count >= count)
             {
                 inventory[key].count -= count;
             }
@@ -136,19 +168,19 @@ public class InventoryData : MonoBehaviour
             }
 
 
-            InventoryDtoList list = new InventoryDtoList();
-            list.data = new InventoryDto[inventory.Count];
-            int iter = 0;
-            foreach (var item in inventory)
-            {
-                list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
-                iter++;
+            //InventoryDtoList list = new InventoryDtoList();
+            //list.data = new InventoryDto[inventory.Count];
+            //int iter = 0;
+            //foreach (var item in inventory)
+            //{
+            //    list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
+            //    iter++;
 
-            }
+            //}
 
-            string json = JsonUtility.ToJson(list);
-            PlayerPrefs.SetString(INVENTORY_PATH, json);
-            File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
+            //string json = JsonUtility.ToJson(list);
+            //PlayerPrefs.SetString(INVENTORY_PATH, json);
+            //File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
 
         }
     }

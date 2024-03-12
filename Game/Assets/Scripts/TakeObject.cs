@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
@@ -8,9 +9,13 @@ using UnityEngine.UI;
 
 public class TakeObject : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI nameBox;
     [SerializeField] InventoryData inventoryData;
+    [SerializeField] GameObject canvasBox;
+    [SerializeField] public GameObject boxUIresource;
     Animator animator;
     public GameObject objInHand1;
+    public BoxWithResource box;
     public GameObject objInHand2;
     Ray ray;
     [SerializeField] public Camera currentCamera;
@@ -38,7 +43,7 @@ public class TakeObject : MonoBehaviour
             Drop();
         }
 
-        
+
 
     }
 
@@ -54,21 +59,37 @@ public class TakeObject : MonoBehaviour
                 {
                     inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>());
                     Destroy(hitInfo.collider.gameObject);
-                    if(animator != null)
+                    if (animator != null)
                     {
                         animator.SetTrigger("TakeObject");
                     }
-                    
-                }   
+
+
+
+                }
+
+                if (hitInfo.collider.gameObject.layer == 11)
+                {
+
+                    box = hitInfo.collider.GetComponent<BoxWithResource>();
+                    nameBox.text = box.name;
+
+                    boxUIresource.GetComponent<InventoryView>().resource = box.resource;
+                    canvasBox.gameObject.SetActive(true);
+                    isTake = false;
+
+
+
+                }
             }
         }
     }
 
     public void Drop()
     {
-        if(objInHand1 != null)
+        if (objInHand1 != null)
         {
-            
+
             objInHand1.transform.parent = null;
             objInHand1.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -76,7 +97,7 @@ public class TakeObject : MonoBehaviour
             objInHand1.GetComponent<MeshCollider>().enabled = true;
             objInHand1.GetComponent<Animator>().enabled = false;
 
-            objInHand1.gameObject.layer = 3;    
+            objInHand1.gameObject.layer = 3;
 
             Destroy(objInHand2);
             objInHand1 = null;

@@ -3,6 +3,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +12,11 @@ public class InventoryItem : MonoBehaviour
 {
     [SerializeField] public Image image;
     [SerializeField] public TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] public string id;
     [SerializeField] public InventoryView inventoryView;
     [SerializeField] public GameObject[] target;
     [SerializeField] public GameObject inventory;
-    [SerializeField] public InventoryData data;
+    [SerializeField] public InventoryData inventoryData;
     [SerializeField] public TakeObject takeObject;
     [SerializeField] private GameManager gameManager;
 
@@ -25,13 +27,70 @@ public class InventoryItem : MonoBehaviour
         items = inventoryView.scriptableItems;
     }
 
+    public void ThrowInBox()
+    {
+
+        foreach (var item in inventoryView.sideInventoryView.inventoryItems)
+        {
+
+
+            if (item.GetComponent<InventoryItem>().id == "")
+            {
+                takeObject.box.resource.Add(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+                inventoryData.RemoveData(id, int.Parse(textMeshProUGUI.text));
+                break;
+            }
+            if (item.GetComponent<InventoryItem>().id == id)
+            {
+                takeObject.box.resource[id] = new ObjectData(int.Parse(item.GetComponent<InventoryItem>().textMeshProUGUI.text) + int.Parse(textMeshProUGUI.text), id);
+                inventoryData.RemoveData(id, int.Parse(textMeshProUGUI.text));
+                break;
+            }
+
+        }
+
+        inventory.SetActive(false);
+        Debug.Log("enabled");
+        inventory.SetActive(true);
+
+    }
+
+    public void ThrowInInventory()
+    {
+
+
+        foreach (var item in inventoryView.sideInventoryView.inventoryItems)
+        {
+            if (item.GetComponent<InventoryItem>().id == "")
+            {
+                inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+                takeObject.box.resource.Remove(id);
+                break;
+            }
+            if (item.GetComponent<InventoryItem>().id == id)
+            {
+                //inventoryData.inventory[id] = new ObjectData(int.Parse(item.GetComponent<InventoryItem>().textMeshProUGUI.text) + int.Parse(textMeshProUGUI.text), id);
+                inventoryData.inventory[id] = new ObjectData(int.Parse(textMeshProUGUI.text) + int.Parse(item.textMeshProUGUI.text), id);
+                takeObject.box.resource.Remove(id);
+                Debug.Log(item.GetComponent<InventoryItem>().id);
+
+                //inventoryData.RemoveData(id, int.Parse(textMeshProUGUI.text));
+                break;
+            }
+        }
+
+        inventory.SetActive(false);
+        inventory.SetActive(true);
+
+    }
+
     public void GetObject()
-    {   
+    {
         if (textMeshProUGUI.text == "")
         {
             if (takeObject.objInHand1 != null)
             {
-                data.AddData(takeObject.objInHand1.GetComponent<ObjectData>().id, new ObjectData(1, takeObject.objInHand1.GetComponent<ObjectData>().id));
+                inventoryData.AddData(takeObject.objInHand1.GetComponent<ObjectData>().id, new ObjectData(1, takeObject.objInHand1.GetComponent<ObjectData>().id));
 
                 Destroy(takeObject.objInHand1);
 
@@ -45,7 +104,7 @@ public class InventoryItem : MonoBehaviour
                 gameManager.viewObjectInHand = false;
             }
         }
-        
+
 
         if (takeObject.objInHand1 == null)
         {
@@ -55,7 +114,7 @@ public class InventoryItem : MonoBehaviour
         else
         {
 
-            data.AddData(takeObject.objInHand1.GetComponent<ObjectData>().id, new ObjectData(1, takeObject.objInHand1.GetComponent<ObjectData>().id));
+            inventoryData.AddData(takeObject.objInHand1.GetComponent<ObjectData>().id, new ObjectData(1, takeObject.objInHand1.GetComponent<ObjectData>().id));
 
             Destroy(takeObject.objInHand1);
             Destroy(takeObject.objInHand2);
@@ -70,7 +129,7 @@ public class InventoryItem : MonoBehaviour
         foreach (var item in items)
         {
 
-            if (item.sprite == image.sprite)
+            if (item.id == id)
             {
                 if (item.typeObject == TypeObject.Instrument)
                 {
@@ -98,7 +157,7 @@ public class InventoryItem : MonoBehaviour
                     obj1.gameObject.layer = 7;
                     obj2.gameObject.layer = 6;
 
-                    data.RemoveData(item.id, 1);
+                    inventoryData.RemoveData(item.id, 1);
 
                     takeObject.objInHand1 = obj1;
                     takeObject.objInHand2 = obj2;
@@ -129,7 +188,7 @@ public class InventoryItem : MonoBehaviour
                     obj1.gameObject.layer = 7;
                     obj2.gameObject.layer = 6;
 
-                    data.RemoveData(item.id, 1);
+                    inventoryData.RemoveData(item.id, 1);
 
                     takeObject.objInHand1 = obj1;
                     takeObject.objInHand2 = obj2;
@@ -139,4 +198,5 @@ public class InventoryItem : MonoBehaviour
             }
         }
     }
+
 }
