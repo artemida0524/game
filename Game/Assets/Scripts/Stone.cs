@@ -25,7 +25,7 @@ public class Stone : MonoBehaviour
         animator.SetTrigger("shake");
         if (hp <= 0)
         {
-            hp = 20;
+            StartCoroutine(SetHp());
             for (int i = 0; i < 5; i++)
             {
                 GameObject obj = Instantiate(stone, transform.position, Quaternion.identity);
@@ -35,5 +35,11 @@ public class Stone : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator SetHp()
+    {
+        yield return new WaitForSeconds(0.5f);
+        hp = 20;
     }
 }

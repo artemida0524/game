@@ -58,7 +58,7 @@ public class NVWaterShaders : MonoBehaviour
         thisRenderer = GetComponent<Renderer>();
         wVectorX = Vector2.zero;
         wVectorY = Vector2.zero;
-        if (depthTextureModeOn) Camera.main.depthTextureMode = DepthTextureMode.Depth;
+        //if (depthTextureModeOn) Camera.main.depthTextureMode = DepthTextureMode.Depth;
         
         //--------------
     }

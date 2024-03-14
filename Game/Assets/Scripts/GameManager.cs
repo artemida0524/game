@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainCharacter;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private TakeObject takeObject;
+    [SerializeField] private GameObject craftCanvas;
     public GameObject lastObject;
     [SerializeField] private GameObject target1;
     [SerializeField] private GameObject target2;
@@ -32,8 +33,29 @@ public class GameManager : MonoBehaviour
         //{
         //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", "");
         //    inventoryData.inventory.Clear();
-        //    PlayerPrefs.DeleteAll();
+        //    PlayerPrefs.DeleteKey("Inventory");
         //}
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (craftCanvas.activeSelf == false)
+            {
+                craftCanvas.SetActive(true);
+                takeObject.isTake = false;
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                craftCanvas.SetActive(false);
+                takeObject.isTake = true;
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
 
         if (Input.GetKeyDown(KeyCode.E) && viewObjectInHand)
         {

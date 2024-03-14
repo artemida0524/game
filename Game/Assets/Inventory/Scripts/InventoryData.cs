@@ -42,8 +42,8 @@ public class InventoryData : MonoBehaviour
 
     public Dictionary<string, ObjectData> inventory = new Dictionary<string, ObjectData>();
     [SerializeField] public List<GameObject> subjects = new List<GameObject>();
-    float timeOut = 1f;
-    float time = 0f;
+    float timeOut = 0.5f;
+    float time = 1f;
 
 
     private void Start()
@@ -95,6 +95,8 @@ public class InventoryData : MonoBehaviour
         PlayerPrefs.SetString(INVENTORY_PATH, json);
         File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
     }
+
+
 
     public void AddData(string key, ObjectData data)
     {

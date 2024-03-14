@@ -49,7 +49,8 @@ public class Tree : MonoBehaviour
         animator.SetTrigger("Chop");
         if (hp <= 0)
         {
-            hp = 20;
+            
+            StartCoroutine(SetHp());
             GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
             obj.transform.position += new Vector3(0, 1, 0);
 
@@ -60,4 +61,12 @@ public class Tree : MonoBehaviour
             Destroy(tree);
         }
     }
+    IEnumerator SetHp()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
+        hp = 20;
+    }
+
+
 }

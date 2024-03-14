@@ -54,8 +54,8 @@ public class InteractorForObjects : MonoBehaviour
                                     if (hit.collider.gameObject.layer == 8 && item.id == "axe")
                                     {
                                         Debug.Log("Chop");
-
                                         hit.collider.GetComponent<Tree>().Chop();
+                                        Debug.Log(hit.collider.GetComponent<Tree>().hp);
 
                                         if (hit.collider.GetComponent<Tree>().hp <= 0)
                                         {

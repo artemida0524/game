@@ -308,7 +308,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   inventory: {fileID: 0}
-  data: {fileID: 0}
+  inventoryData: {fileID: 0}
   takeObject: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &6377862516497473843

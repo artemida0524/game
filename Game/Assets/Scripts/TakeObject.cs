@@ -31,6 +31,8 @@ public class TakeObject : MonoBehaviour
     private void Update()
     {
 
+        
+
         currentCamera = GetComponent<Player1>().currentCamera;
         ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
         if (objInHand1 == null && isTake)
