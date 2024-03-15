@@ -37,36 +37,26 @@ public class Tree : MonoBehaviour
             vector3.z += Random.Range(-4.0f, 4.0f);
             timeUp = 0;
             Instantiate(obj, vector3, Quaternion.identity);
-
-
-
         }
     }
-
     public void Chop()
     {
         hp -= 3;
         animator.SetTrigger("Chop");
-        if (hp <= 0)
-        {
-            
-            StartCoroutine(SetHp());
-            GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
-            obj.transform.position += new Vector3(0, 1, 0);
-
-            
-            Instantiate(transform.parent, new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f)), Quaternion.identity);
-            
-
-            Destroy(tree);
-        }
-    }
-    IEnumerator SetHp()
-    {
         
-        yield return new WaitForSeconds(0.5f);
-        hp = 20;
     }
+    public void DeleteObject()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
+            obj.transform.position += new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, Random.Range(-1.0f, 1.0f));
+        }
 
 
+        Instantiate(transform.parent, new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f)), Quaternion.identity);
+
+        Destroy(tree);
+
+    }
 }

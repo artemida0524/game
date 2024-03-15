@@ -7,6 +7,13 @@ using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject miniMapCamera;
+    [SerializeField] private GameObject tree;
+    [SerializeField] private GameObject bigStone;
+    [SerializeField] private GameObject fiber;
+    [SerializeField] private GameObject wood;
+
+
     [SerializeField] private GameObject inventory;
     [SerializeField] private InventoryData inventoryData;
     private ScriptableItem[] items;
@@ -20,10 +27,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject target2;
     private bool isActive = false;
     public bool viewObjectInHand = false;
+    private Vector3 newPosition;
 
     private void Start()
     {
         items = inventoryView.scriptableItems;
+
+        for (int i = 0; i < 20; i++)
+        {
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(tree, newPosition, Quaternion.identity);
+            
+
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(bigStone, newPosition, Quaternion.identity);
+
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(fiber, newPosition, Quaternion.identity);
+
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(wood, newPosition, Quaternion.identity);
+
+        }
+
     }
 
     private void Update()

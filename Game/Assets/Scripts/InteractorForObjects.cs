@@ -55,10 +55,11 @@ public class InteractorForObjects : MonoBehaviour
                                     {
                                         Debug.Log("Chop");
                                         hit.collider.GetComponent<Tree>().Chop();
-                                        Debug.Log(hit.collider.GetComponent<Tree>().hp);
 
                                         if (hit.collider.GetComponent<Tree>().hp <= 0)
                                         {
+                                            hit.collider.GetComponent<Tree>().hp = 20;
+                                            hit.collider.GetComponent<Tree>().DeleteObject();
                                             if (inventoryView.inventoryData.inventory.ContainsKey(item.id))
                                             {
                                                 inventoryView.inventoryData.RemoveData(item.id, 1);
@@ -80,9 +81,11 @@ public class InteractorForObjects : MonoBehaviour
                                     if (hit.collider.gameObject.layer == 9 && item.id == "pickaxe")
                                     {
                                         hit.collider.GetComponent<Stone>().Bam();
-
+                                        
                                         if (hit.collider.GetComponent<Stone>().hp <= 0)
                                         {
+                                            hit.collider.GetComponent<Stone>().hp = 20;
+                                            hit.collider.GetComponent<Stone>().DeleteObject();
                                             if (inventoryView.inventoryData.inventory.ContainsKey(item.id))
                                             {
                                                 inventoryView.inventoryData.RemoveData(item.id, 1);

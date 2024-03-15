@@ -52,13 +52,19 @@ public class TakeObject : MonoBehaviour
 
     private void RayTake()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance))
             {
                 if (hitInfo.collider.gameObject.layer == 3)
                 {
+
+                    if(hitInfo.collider.TryGetComponent(out ObjectOnGrass component))
+                    {
+                        component.TP();
+                    }
+
+                    
                     inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>());
                     Destroy(hitInfo.collider.gameObject);
                     if (animator != null)
@@ -66,8 +72,7 @@ public class TakeObject : MonoBehaviour
                         animator.SetTrigger("TakeObject");
                     }
 
-
-
+                    
                 }
 
                 if (hitInfo.collider.gameObject.layer == 11)
@@ -97,7 +102,15 @@ public class TakeObject : MonoBehaviour
 
             objInHand1.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
             objInHand1.GetComponent<MeshCollider>().enabled = true;
+            try
+            {
             objInHand1.GetComponent<Animator>().enabled = false;
+
+            }
+            catch (System.Exception)
+            {
+                
+            }
 
             objInHand1.gameObject.layer = 3;
 

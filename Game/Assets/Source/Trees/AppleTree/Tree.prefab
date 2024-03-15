@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6310c4a4c5c818f45a64133382278b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
-  wood: {fileID: 1412445599507680912, guid: a88fd48456f48d34faa684d8fe62a76c, type: 3}
+  time: 200
+  wood: {fileID: 7448818084595655580, guid: ae9fa5dd6f476cd4db744fc113546c2a, type: 3}
   tree: {fileID: 1910064354058430363}
   hp: 20
   obj: {fileID: 6169181730790054320, guid: 76e7a724af66a52488b4dda9dbdb2a2a, type: 3}
@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 4661318322093684334}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 7.55, z: 0}
+  m_LocalPosition: {x: 0, y: 13.6, z: 0}
   m_LocalScale: {x: 1.4685, y: 1.4685, z: 1.4685}
   m_ConstrainProportionsScale: 0
   m_Children: []
