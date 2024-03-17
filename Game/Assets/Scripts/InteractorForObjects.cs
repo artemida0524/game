@@ -9,12 +9,17 @@ public class InteractorForObjects : MonoBehaviour
     private Animator animator;
     private ScriptableItem[] items;
     private float time;
-    private float timeUp = 0.7f;
+    private float timeOut = 0.7f;
+
+    private float timeFood;
+    private float timeOutFood = 3;
     [SerializeField] InventoryView inventoryView;
+    [SerializeField] InteractibleIndecator indecator;
 
 
     private void Start()
     {
+        indecator = GetComponent<InteractibleIndecator>();
         items = inventoryView.scriptableItems;
         animator = GetComponent<Animator>();
         takeObject = GetComponent<TakeObject>();
@@ -23,7 +28,8 @@ public class InteractorForObjects : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= timeUp)
+        timeFood += Time.deltaTime;
+        if (time >= timeOut)
         {
 
             if (Input.GetMouseButtonDown(0))
@@ -81,7 +87,7 @@ public class InteractorForObjects : MonoBehaviour
                                     if (hit.collider.gameObject.layer == 9 && item.id == "pickaxe")
                                     {
                                         hit.collider.GetComponent<Stone>().Bam();
-                                        
+
                                         if (hit.collider.GetComponent<Stone>().hp <= 0)
                                         {
                                             hit.collider.GetComponent<Stone>().hp = 20;
@@ -110,6 +116,29 @@ public class InteractorForObjects : MonoBehaviour
 
                             if (item.typeObject == TypeObject.Food)
                             {
+                                if (timeFood > timeOutFood)
+                                {
+                                    animator.SetTrigger("Eat");
+                                    indecator.itemsIndecator[0].count.text = $"{int.Parse(indecator.itemsIndecator[0].count.text) + item.SetHpIfFood}";
+                                    indecator.itemsIndecator[1].count.text = $"{int.Parse(indecator.itemsIndecator[1].count.text) + item.SetFoodIfFood}";
+                                    indecator.itemsIndecator[2].count.text = $"{int.Parse(indecator.itemsIndecator[2].count.text) + item.SetWaterIfFood}";
+
+                                    if (inventoryView.inventoryData.inventory.ContainsKey(item.id))
+                                    {
+                                        inventoryView.inventoryData.RemoveData(item.id, 1);
+                                    }
+                                    else
+                                    {
+                                        Destroy(takeObject.objInHand1);
+
+                                        Destroy(takeObject.objInHand2);
+
+                                        takeObject.objInHand1 = null;
+                                        takeObject.objInHand2 = null;
+                                        takeObject.isTake = true;
+                                    }
+                                    timeFood = 0;
+                                }
 
                             }
 

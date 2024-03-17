@@ -17,7 +17,7 @@ public class WaterPhysicsForPlayer : MonoBehaviour
 
         if (other.gameObject.name == "WaterForPlayer")
         {
-
+            
             float difference = (other.transform.position.y - transform.position.y) * floatUpSpeed;
 
             GetComponent<Rigidbody>().AddForce(new Vector3(0f, Mathf.Clamp((Mathf.Abs(Physics.gravity.y) * difference), 0, Mathf.Abs(Physics.gravity.y) * floatUpSpeedLimit), 0f), ForceMode.Acceleration);
@@ -30,7 +30,7 @@ public class WaterPhysicsForPlayer : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 4)
+        if (other.gameObject.name == "WaterForPlayer")
         {
             GetComponent<Rigidbody>().drag = 0f;
             GetComponent<Rigidbody>().angularDrag = 0f;

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject miniMapCamera;
     [SerializeField] private GameObject tree;
     [SerializeField] private GameObject bigStone;
+    [SerializeField] private GameObject stone;
     [SerializeField] private GameObject fiber;
     [SerializeField] private GameObject wood;
 
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InventoryView inventoryView;
     [SerializeField] private GameObject mainCharacter;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject canvasBox;
     [SerializeField] private TakeObject takeObject;
     [SerializeField] private GameObject craftCanvas;
     public GameObject lastObject;
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
         {
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(tree, newPosition, Quaternion.identity);
-            
+
 
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(bigStone, newPosition, Quaternion.identity);
@@ -45,15 +47,50 @@ public class GameManager : MonoBehaviour
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(fiber, newPosition, Quaternion.identity);
 
+        }
+        for (int i = 0; i < 50; i++)
+        {
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(wood, newPosition, Quaternion.identity);
 
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(stone, newPosition, Quaternion.identity);
         }
-
     }
 
     private void Update()
     {
+        if (lastObject != null)
+        {
+            Debug.Log( "last"+ " " + lastObject.name);
+
+        }
+        if (takeObject.objInHand1 != null)
+        {
+            Debug.Log("obj" + " " + takeObject.objInHand1.name);
+
+        }
+
+        Debug.Log(viewObjectInHand);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (mainMenu.activeSelf == false)
+            {
+                mainMenu.SetActive(true);
+                takeObject.isTake = false;
+
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                mainMenu.SetActive(false);
+                takeObject.isTake = true;
+
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{
@@ -81,18 +118,30 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.E) && viewObjectInHand)
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            viewObjectInHand = !viewObjectInHand;
-            Debug.Log("EEEEEE");
+            if (canvasBox.activeSelf == true)
+            {
+                canvasBox.SetActive(false);
+
+                takeObject.isTake = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)/* && viewObjectInHand*/)
+        {
+            Debug.Log(takeObject.objInHand1.name);
             if (takeObject.objInHand1 != null)
             {
+                viewObjectInHand = !viewObjectInHand;
+                Debug.Log("EEEEEE");
                 foreach (var item in items)
                 {
                     if (item.id == takeObject.objInHand1.GetComponent<ObjectData>().id)
                     {
+                        Debug.Log(item.id);
                         lastObject = item.gameObject;
                     }
                 }
@@ -112,12 +161,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && !viewObjectInHand)
+        if (Input.GetKeyDown(KeyCode.R) && viewObjectInHand)
         {
-            Debug.Log("RRRRRR");
-            viewObjectInHand = !viewObjectInHand;
+            Debug.Log("r");
             if (lastObject != null)
             {
+                viewObjectInHand = !viewObjectInHand;
+                Debug.Log("RRRRRR");
                 GameObject obj1 = Instantiate(lastObject, target1.transform.position, lastObject.gameObject.transform.rotation);
                 GameObject obj2 = Instantiate(lastObject, target2.transform.position, Quaternion.identity);
 
@@ -187,6 +237,10 @@ public class GameManager : MonoBehaviour
     public void OK(GameObject canvas)
     {
         canvas.gameObject.SetActive(false);
+
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 }

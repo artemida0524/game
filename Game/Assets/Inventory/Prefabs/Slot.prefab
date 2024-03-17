@@ -93,13 +93,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1218833804586280031}
   textMeshProUGUI: {fileID: 3087580855459559337}
+  id: 
   inventoryView: {fileID: 0}
   target:
   - {fileID: 0}
   - {fileID: 0}
   inventory: {fileID: 0}
-  data: {fileID: 0}
+  inventoryData: {fileID: 0}
   takeObject: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &8336166320389164618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,14 +185,14 @@ RectTransform:
   m_GameObject: {fileID: 584161649248153123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.58457, y: 0.58457, z: 0.58457}
+  m_LocalScale: {x: 0.35722488, y: 0.35722488, z: 0.35722488}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8490701764990504897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10.799988}
+  m_AnchoredPosition: {x: 0, y: 8.6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2719434297330916151
@@ -265,7 +267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.7, y: -29.7}
+  m_AnchoredPosition: {x: 24.7, y: -17.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &192603820920625830
@@ -359,7 +361,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -192.65489, y: -16.316187, z: 8.14016, w: 0}
+  m_margin: {x: -96.311584, y: -7.923361, z: 96.775925, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

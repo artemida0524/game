@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class TakeObject : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI nameBox;
-    [SerializeField] InventoryData inventoryData;
+    [SerializeField] public InventoryData inventoryData;
     [SerializeField] GameObject canvasBox;
     [SerializeField] public GameObject boxUIresource;
     Animator animator;

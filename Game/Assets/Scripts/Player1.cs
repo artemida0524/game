@@ -7,13 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class Player1 : MonoBehaviour
 {
-
+    private const int smoothFieldOfView = 40;
     [SerializeField] private Animator animator;
+    [SerializeField] private InteractibleIndecator interactibleIndecator;
     [SerializeField] private GameObject shark;
     [SerializeField] private GameObject bodySkeleton;
     [SerializeField] private CinemachineVirtualCamera cinemachineCameraFace1;
     [SerializeField] private Camera cameraFrom3;
     [SerializeField] private Camera cameraFrom1;
+    [SerializeField] private Camera miniMapCamera;
 
 
 
@@ -56,14 +58,14 @@ public class Player1 : MonoBehaviour
         Cursor.visible = false;
         animatorShark = shark.GetComponent<Animator>();
         currentCamera = cameraFrom1;
-        takeObject = GetComponent<TakeObject>(); 
+        takeObject = GetComponent<TakeObject>();
     }
 
 
     void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             isBoxing = !isBoxing;
         }
@@ -81,7 +83,7 @@ public class Player1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-            
+
         }
     }
     private void SwitchCamera()
@@ -99,9 +101,9 @@ public class Player1 : MonoBehaviour
             takeObject.maxDistance = 5f;
         }
 
-        else if (cinemachineCameraFace1.Priority == 9)  
+        else if (cinemachineCameraFace1.Priority == 9)
         {
-            
+
             bodySkeleton.SetActive(false);
             cinemachineCameraFace1.Priority = 11;
             cameraFrom3.gameObject.SetActive(false);
@@ -231,6 +233,10 @@ public class Player1 : MonoBehaviour
             vertical += Time.deltaTime;
             vertical = Mathf.Clamp(vertical, 0, 0.4f);
             transform.Translate(new Vector3(0, 0, vertical) * speedForWalk * Time.deltaTime);
+
+            miniMapCamera.fieldOfView += Time.deltaTime * smoothFieldOfView;
+            miniMapCamera.fieldOfView = Mathf.Clamp(miniMapCamera.fieldOfView, 60, 70);
+
         }
 
         if (Input.GetKeyUp(KeyCode.W))
@@ -280,6 +286,7 @@ public class Player1 : MonoBehaviour
             forTurnRight = false;
             forDownVerticalBool = false;
             isW = false;
+
         }
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift) && isRun)
         {
@@ -290,6 +297,9 @@ public class Player1 : MonoBehaviour
             vertical += Time.deltaTime;
             vertical = Mathf.Clamp(vertical, 0.0f, 1.0f);
             transform.Translate(new Vector3(0, 0, vertical) * speed * Time.deltaTime);
+
+            miniMapCamera.fieldOfView += Time.deltaTime * smoothFieldOfView;
+            miniMapCamera.fieldOfView = Mathf.Clamp(miniMapCamera.fieldOfView, 60, 80);
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
@@ -297,6 +307,7 @@ public class Player1 : MonoBehaviour
             forTurnLeft = true;
             forTurnRight = true;
             forDownVerticalBool = true;
+
 
         }
     }
@@ -347,6 +358,10 @@ public class Player1 : MonoBehaviour
             return;
         }
 
+
+        miniMapCamera.fieldOfView -= Time.deltaTime * smoothFieldOfView;
+        miniMapCamera.fieldOfView = Mathf.Clamp(miniMapCamera.fieldOfView, 60, 80);
+
         vertical = Mathf.SmoothDamp(vertical, 0.0f, ref smoothVelocity_ForDownVertical, smoothTime);
     }
 
@@ -369,10 +384,13 @@ public class Player1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "middleFinger")
+        if (other.gameObject.layer == 12)
         {
             animator.SetTrigger("GetHit");
-        }
+            interactibleIndecator.itemsIndecator[0].count.text = $"{int.Parse(interactibleIndecator.itemsIndecator[0].count.text) - 3} ";
+
+
+        }   
         if (other.gameObject.name == "Waters")
         {
             isGround = false;

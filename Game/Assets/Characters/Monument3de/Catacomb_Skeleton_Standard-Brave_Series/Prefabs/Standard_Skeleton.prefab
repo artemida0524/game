@@ -815,7 +815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8626356860446325245
 Transform:
   m_ObjectHideFlags: 0
@@ -1910,11 +1910,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  interactibleIndecator: {fileID: 0}
   shark: {fileID: 0}
   bodySkeleton: {fileID: 3903457608909190902}
   cinemachineCameraFace1: {fileID: 0}
   cameraFrom3: {fileID: 0}
   cameraFrom1: {fileID: 0}
+  miniMapCamera: {fileID: 0}
   currentCamera: {fileID: 0}
   speed: 5
   speedForWalk: 3.87
@@ -1946,8 +1948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c63f76b886b03848a5e6a88f924a7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameBox: {fileID: 0}
   inventoryData: {fileID: 7938172659000212849}
+  canvasBox: {fileID: 0}
+  boxUIresource: {fileID: 0}
   objInHand1: {fileID: 0}
+  box: {fileID: 0}
   objInHand2: {fileID: 0}
   currentCamera: {fileID: 0}
   maxDistance: 2
@@ -1986,6 +1992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryView: {fileID: 0}
+  indecator: {fileID: 0}
 --- !u!1 &7531005832867353885
 GameObject:
   m_ObjectHideFlags: 0

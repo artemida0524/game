@@ -29,7 +29,7 @@ public class Stone : MonoBehaviour
 
     public void DeleteObject()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
             GameObject obj = Instantiate(stone, transform.position, Quaternion.identity);
             obj.transform.position += new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, Random.Range(-1.0f, 1.0f));
@@ -37,6 +37,6 @@ public class Stone : MonoBehaviour
         Instantiate(transform.parent, new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f)), Quaternion.identity);
 
         Destroy(bigStone);
-
+        
     }
 }

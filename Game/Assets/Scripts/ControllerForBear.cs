@@ -60,17 +60,7 @@ public class ControllerForBear : MonoBehaviour
             Standart();
         }
 
-        if(Input.GetKeyDown(KeyCode.T) && !standart)
-        {
-            animator.SetTrigger("reset");
-        }
-
     }
-
-    
-    
-
-
     private void Attack(Vector3 direction)
     {
         float distance = direction.magnitude;

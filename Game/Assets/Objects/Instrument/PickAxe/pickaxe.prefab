@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4033527993586472149}
   - component: {fileID: 3375621615783678857}
   - component: {fileID: 8118285380587382070}
-  - component: {fileID: 7887236157474318211}
   - component: {fileID: 7577907863322652842}
   m_Layer: 3
   m_Name: pickaxe
@@ -123,20 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   count: 1
   id: pickaxe
---- !u!114 &7887236157474318211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4446652110717898872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91cf7f6a34e3ded4a82e323151db8a89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floatUpSpeedLimit: 1.15
-  floatUpSpeed: 4
 --- !u!54 &7577907863322652842
 Rigidbody:
   m_ObjectHideFlags: 0

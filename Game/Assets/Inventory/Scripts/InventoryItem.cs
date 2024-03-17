@@ -148,7 +148,7 @@ public class InventoryItem : MonoBehaviour
                     obj1.GetComponent<MeshCollider>().enabled = false;
 
                     gameManager.lastObject = item.gameObject;
-                    gameManager.viewObjectInHand = true;
+                    gameManager.viewObjectInHand = false;
 
 
                     obj2.GetComponent<Rigidbody>().isKinematic = true;
@@ -179,7 +179,8 @@ public class InventoryItem : MonoBehaviour
                     obj2.transform.localEulerAngles = item.gameObject.transform.localEulerAngles;
 
                     obj1.GetComponent<Rigidbody>().isKinematic = true;
-
+                    gameManager.lastObject = item.gameObject;
+                    gameManager.viewObjectInHand = false;
                     obj1.GetComponent<MeshCollider>().enabled = false;
 
                     obj2.GetComponent<Rigidbody>().isKinematic = true;

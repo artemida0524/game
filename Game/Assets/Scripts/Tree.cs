@@ -47,7 +47,7 @@ public class Tree : MonoBehaviour
     }
     public void DeleteObject()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
             GameObject obj = Instantiate(wood, transform.position, Quaternion.identity);
             obj.transform.position += new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, Random.Range(-1.0f, 1.0f));
