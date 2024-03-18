@@ -102,6 +102,7 @@ public class InventoryItem : MonoBehaviour
                 inventory.SetActive(false);
                 gameManager.lastObject = null;
                 gameManager.viewObjectInHand = false;
+                return;
             }
         }
 
@@ -109,7 +110,7 @@ public class InventoryItem : MonoBehaviour
         if (takeObject.objInHand1 == null)
         {
             TakeInHand();
-
+            
         }
         else
         {
@@ -120,8 +121,20 @@ public class InventoryItem : MonoBehaviour
             Destroy(takeObject.objInHand2);
 
             TakeInHand();
-
+            
         }
+
+        foreach (var item in items)
+        {
+            if(item.id == id && item.typeObject == TypeObject.Build)
+            {
+
+                //takeObject.isTake = false;
+                
+
+            }
+        }
+
     }
 
     private void TakeInHand()

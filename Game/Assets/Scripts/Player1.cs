@@ -1,5 +1,6 @@
 using Cinemachine;
 using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
@@ -17,9 +18,10 @@ public class Player1 : MonoBehaviour
     [SerializeField] private Camera cameraFrom1;
     [SerializeField] private Camera miniMapCamera;
 
+    [SerializeField] GameObject objTest;
+    bool booltest = false;
 
-
-
+    
     private TakeObject takeObject;
     private Animator animatorShark;
     public Camera currentCamera;
@@ -53,6 +55,8 @@ public class Player1 : MonoBehaviour
 
     void Start()
     {
+        objTest.GetComponent<BoxCollider>().enabled = false;
+        
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -85,6 +89,31 @@ public class Player1 : MonoBehaviour
             Jump();
 
         }
+
+        Ray ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
+
+        if (Input.GetKeyDown(KeyCode.I) && !booltest)
+        {
+            booltest = true;
+            objTest = Instantiate(objTest, new Vector3(0,0,0), Quaternion.identity);
+            objTest.GetComponent<BoxCollider>().enabled = false;
+            takeObject.isTake = false;
+        }
+
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 5) && booltest)
+        {
+            objTest.transform.position = hitInfo.point;
+            objTest.transform.position += new Vector3(0, 0.4f, 0);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                booltest = false;
+                objTest.GetComponent<BoxCollider>().enabled = true;
+                takeObject.isTake = true;
+            }
+        }
+
     }
     private void SwitchCamera()
     {

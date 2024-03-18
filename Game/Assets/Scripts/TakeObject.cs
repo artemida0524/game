@@ -44,9 +44,6 @@ public class TakeObject : MonoBehaviour
         {
             Drop();
         }
-
-
-
     }
 
 

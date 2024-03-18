@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject miniMapCamera;
     [SerializeField] private GameObject tree;
     [SerializeField] private GameObject bigStone;
+    [SerializeField] private GameObject bigIronOre;
     [SerializeField] private GameObject stone;
     [SerializeField] private GameObject fiber;
     [SerializeField] private GameObject wood;
@@ -46,6 +47,9 @@ public class GameManager : MonoBehaviour
 
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(fiber, newPosition, Quaternion.identity);
+
+            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+            Instantiate(bigIronOre, newPosition, Quaternion.identity);
 
         }
         for (int i = 0; i < 50; i++)

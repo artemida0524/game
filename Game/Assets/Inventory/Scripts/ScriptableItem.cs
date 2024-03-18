@@ -6,7 +6,8 @@ public enum TypeObject
     Weapon,
     Food,
     Instrument,
-    Resource
+    Resource,
+    Build
 }
 
 
