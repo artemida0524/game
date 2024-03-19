@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using UnityEditor.PackageManager;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
@@ -11,6 +12,8 @@ public class Player1 : MonoBehaviour
     private const int smoothFieldOfView = 40;
     [SerializeField] private Animator animator;
     [SerializeField] private InteractibleIndecator interactibleIndecator;
+    [SerializeField] private GameObject inventroy;
+    [SerializeField] private InventoryData inventoryData;
     [SerializeField] private GameObject shark;
     [SerializeField] private GameObject bodySkeleton;
     [SerializeField] private CinemachineVirtualCamera cinemachineCameraFace1;
@@ -18,10 +21,10 @@ public class Player1 : MonoBehaviour
     [SerializeField] private Camera cameraFrom1;
     [SerializeField] private Camera miniMapCamera;
 
-    [SerializeField] GameObject objTest;
-    bool booltest = false;
+    [SerializeField] GameObject objBuild;
+    bool isBuild = false;
 
-    
+
     private TakeObject takeObject;
     private Animator animatorShark;
     public Camera currentCamera;
@@ -55,8 +58,7 @@ public class Player1 : MonoBehaviour
 
     void Start()
     {
-        objTest.GetComponent<BoxCollider>().enabled = false;
-        
+        inventoryData = GetComponent<InventoryData>();
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -92,29 +94,51 @@ public class Player1 : MonoBehaviour
 
         Ray ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
 
-        if (Input.GetKeyDown(KeyCode.I) && !booltest)
+        //if (Input.GetKeyDown(KeyCode.I) && !booltest)
+        //{
+        //    booltest = true;
+        //    objTest = Instantiate(objTest, new Vector3(0, 0, 0), objTest.transform.rotation);
+        //    objTest.GetComponent<BoxCollider>().enabled = false;
+        //    takeObject.isTake = false;
+        //}
+
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, takeObject.maxDistance) && isBuild)
         {
-            booltest = true;
-            objTest = Instantiate(objTest, new Vector3(0,0,0), Quaternion.identity);
-            objTest.GetComponent<BoxCollider>().enabled = false;
-            takeObject.isTake = false;
-        }
+            objBuild.transform.position = hitInfo.point;
+            objBuild.transform.position += new Vector3(0, 0.4f, 0);
 
-
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 5) && booltest)
-        {
-            objTest.transform.position = hitInfo.point;
-            objTest.transform.position += new Vector3(0, 0.4f, 0);
-
+            if (Input.GetKey(KeyCode.Z))
+            {
+                objBuild.transform.Rotate(new Vector3(0, 0, -40) * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.X))
+            {
+                objBuild.transform.Rotate(new Vector3(0, 0, 40) * Time.deltaTime);
+            }
             if (Input.GetMouseButtonDown(0))
             {
-                booltest = false;
-                objTest.GetComponent<BoxCollider>().enabled = true;
+                isBuild = false;
+                objBuild.GetComponent<BoxCollider>().enabled = true;
                 takeObject.isTake = true;
+                inventoryData.RemoveData(objBuild.GetComponent<ObjectData>().id, objBuild.GetComponent<ObjectData>().count);
             }
         }
 
     }
+
+
+    public void Build(GameObject objBuild)
+    {
+        isBuild = true;
+        objBuild = Instantiate(objBuild, new Vector3(0, 0, 0), objBuild.transform.rotation);
+        objBuild.GetComponent<BoxCollider>().enabled = false;
+        takeObject.isTake = false;
+        inventroy.SetActive(false);
+        this.objBuild = objBuild;
+        
+    }
+
     private void SwitchCamera()
     {
 

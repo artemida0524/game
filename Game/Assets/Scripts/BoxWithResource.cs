@@ -9,12 +9,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-public class Obj
-{
-    int count;
-    string name;
-}
-
 public class BoxWithResource : MonoBehaviour
 {
 
@@ -51,7 +45,7 @@ public class BoxWithResource : MonoBehaviour
             }
         }
 
-
+        Debug.Log(idPlayerPrefs);
         
 
         if (nameObj.Length != 0 && countObj.Length != 0)

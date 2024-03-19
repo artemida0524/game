@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb112607b2816647ad36fd7ca81598a, type: 3}
+  m_Name: meltingFurnace
+  m_EditorClassIdentifier: 
+  typeObject: 4
+  SetHpIfFood: 0
+  SetFoodIfFood: 0
+  SetWaterIfFood: 0
+  sprite: {fileID: 21300000, guid: 6ce8b29bc2285a04dbbf81709b56f78d, type: 3}
+  gameObject: {fileID: 3744233569726990687, guid: 5d905314eef98014c9d8040cd4bd89d5, type: 3}
+  count: 0
+  id: meltingFurnace

@@ -16,11 +16,12 @@ public class InteractorForObjects : MonoBehaviour
     [SerializeField] InventoryView inventoryView;
     [SerializeField] InteractibleIndecator indecator;
 
+    public bool isInteractor = false;
 
     private void Start()
     {
         indecator = GetComponent<InteractibleIndecator>();
-        items = inventoryView.scriptableItems;
+        items = inventoryView.scriptableItemList.scriptableItems;
         animator = GetComponent<Animator>();
         takeObject = GetComponent<TakeObject>();
     }
@@ -32,7 +33,7 @@ public class InteractorForObjects : MonoBehaviour
         if (time >= timeOut)
         {
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && isInteractor)
             {
                 if (takeObject.objInHand1 != null)
                 {
@@ -86,7 +87,7 @@ public class InteractorForObjects : MonoBehaviour
 
                                     if (hit.collider.gameObject.layer == 9 && item.id == "pickaxe")
                                     {
-                                        hit.collider.GetComponent<Stone>().Bam();
+                                        hit.collider.GetComponent<Stone>().Bam();   
 
                                         if (hit.collider.GetComponent<Stone>().hp <= 0)
                                         {

@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
@@ -19,12 +20,13 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public InventoryData inventoryData;
     [SerializeField] public TakeObject takeObject;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Player1 mainPlayer;
 
     private ScriptableItem[] items;
 
     private void Start()
     {
-        items = inventoryView.scriptableItems;
+        items = inventoryView.scriptableItemList.scriptableItems;
     }
 
     public void ThrowInBox()
@@ -128,13 +130,46 @@ public class InventoryItem : MonoBehaviour
         {
             if(item.id == id && item.typeObject == TypeObject.Build)
             {
-
+                //objectBuild = item.gameObject;
                 //takeObject.isTake = false;
-                
+                //Debug.Log(item.id);
+                mainPlayer.Build(item.gameObject);
 
+
+                //inventory.SetActive(false);
             }
         }
+        //Ray ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
 
+        //if (Input.GetKeyDown(KeyCode.I) && !booltest)
+        //{
+        //    booltest = true;
+        //    objTest = Instantiate(objTest, new Vector3(0, 0, 0), objTest.transform.rotation);
+        //    objTest.GetComponent<BoxCollider>().enabled = false;
+        //    takeObject.isTake = false;
+        //}
+
+
+        //if (Physics.Raycast(ray, out RaycastHit hitInfo, takeObject.maxDistance) && booltest)
+        //{
+        //    objTest.transform.position = hitInfo.point;
+        //    objTest.transform.position += new Vector3(0, 0.4f, 0);
+
+        //    if (Input.GetKey(KeyCode.Z))
+        //    {
+        //        objTest.transform.Rotate(new Vector3(0, 0, -40) * Time.deltaTime);
+        //    }
+        //    if (Input.GetKey(KeyCode.X))
+        //    {
+        //        objTest.transform.Rotate(new Vector3(0, 0, 40) * Time.deltaTime);
+        //    }
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        booltest = false;
+        //        objTest.GetComponent<BoxCollider>().enabled = true;
+        //        takeObject.isTake = true;
+        //    }
+        //}
     }
 
     private void TakeInHand()

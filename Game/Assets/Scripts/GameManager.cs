@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        items = inventoryView.scriptableItems;
+        items = inventoryView.scriptableItemList.scriptableItems;
 
         for (int i = 0; i < 20; i++)
         {
