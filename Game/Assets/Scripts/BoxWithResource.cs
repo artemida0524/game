@@ -44,8 +44,6 @@ public class BoxWithResource : MonoBehaviour
                 resource.Add(item.id, new ObjectData(item.count, item.id));
             }
         }
-
-        Debug.Log(idPlayerPrefs);
         
 
         if (nameObj.Length != 0 && countObj.Length != 0)

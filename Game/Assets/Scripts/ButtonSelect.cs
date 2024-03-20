@@ -10,6 +10,7 @@ public class ButtonSelect : MonoBehaviour
     [SerializeField] private InventoryData inventoryData;
     [SerializeField] ScriptableItemList scriptableItemList;
     [SerializeField] SlotCraftSelectList slotCraftSelectList;
+    [SerializeField] InventoryView mainInventoryView;
 
     [NonSerialized] public Image currentImage;
     [NonSerialized] public string currentName = "";
@@ -50,6 +51,18 @@ public class ButtonSelect : MonoBehaviour
 
             }
 
+            if (inventoryData.inventory.ContainsKey(currentName))
+            {
+                isSelect = true;
+            }
+            else
+            {
+                if (inventoryData.inventory.Count >= mainInventoryView.SizeInventory - 1)
+                {
+                    isSelect = false;
+                    Debug.Log("false");
+                }
+            }
 
             if (isSelect)
             {
@@ -88,7 +101,6 @@ public class ButtonSelect : MonoBehaviour
                         }
                     }
                 }
-
             }
             else
             {

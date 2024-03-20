@@ -8,18 +8,36 @@ public class InventoryView : MonoBehaviour
     [SerializeField] public InventoryData inventoryData;
     public Dictionary<string, ObjectData> resource;
     [SerializeField] public InventoryItem[] inventoryItems;
-    //[SerializeField] public ScriptableItem[] scriptableItems;
     [SerializeField] public ScriptableItemList scriptableItemList;
     [SerializeField] public InventoryView sideInventoryView;
-    [SerializeField] public GameObject mainCharacter;
+    [SerializeField] public GameObject mainInventory;
+    private int sizeInventory;
+    public int SizeInventory { get => sizeInventory; }
+    [SerializeField] private GameObject mainCharacter;
     [SerializeField] private InteractorForObjects interactorForObjects;
     private Color color1 = new Color(255, 255, 255, 255);
     private Color color2 = new Color(255, 255, 255, 0);
 
-    //private void Start()
-    //{
+    private void Awake()
+    {
+        try
+        {
+            inventoryItems = GetComponentsInChildren<InventoryItem>();
+            sizeInventory = inventoryItems.Length;
+            mainInventory.SetActive(false);
 
-    //}
+        }
+        catch (System.Exception)
+        {
+
+        }
+
+    }
+
+    private void Start()
+    {
+
+    }
 
 
     private void OnEnable()
@@ -27,7 +45,6 @@ public class InventoryView : MonoBehaviour
         try
         {
             interactorForObjects.isInteractor = false;
-
         }
         catch { }
         Cursor.visible = true;
@@ -38,6 +55,7 @@ public class InventoryView : MonoBehaviour
         }
         //mainCharacter.GetComponent<Player1>().enabled = false;
         inventoryItems = GetComponentsInChildren<InventoryItem>();
+
         int iter = 0;
         foreach (var item in resource)
         {
@@ -59,19 +77,17 @@ public class InventoryView : MonoBehaviour
             }
         }
 
-        foreach (var item in inventoryItems)
-        {
-            Debug.Log(item.id + item.textMeshProUGUI.text);
-        }
-
+        //foreach (var item in inventoryItems)
+        //{
+        //    Debug.Log(item.id + " " + item.textMeshProUGUI.text);
+        //}
     }
 
     private void OnDisable()
     {
         try
         {
-        interactorForObjects.isInteractor = true;
-
+            interactorForObjects.isInteractor = true;
         }
         catch { }
         Cursor.visible = false;

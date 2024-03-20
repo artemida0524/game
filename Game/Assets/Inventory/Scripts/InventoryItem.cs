@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
@@ -15,6 +16,8 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public TextMeshProUGUI textMeshProUGUI;
     [SerializeField] public string id;
     [SerializeField] public InventoryView inventoryView;
+    [SerializeField] public InventoryView mainInventoryView;
+    [SerializeField] public InventoryView boxInventoryView;
     [SerializeField] public GameObject[] target;
     [SerializeField] public GameObject inventory;
     [SerializeField] public InventoryData inventoryData;
@@ -31,10 +34,15 @@ public class InventoryItem : MonoBehaviour
 
     public void ThrowInBox()
     {
+        Debug.Log(boxInventoryView.resource.Count  + " " + boxInventoryView.SizeInventory);
 
         foreach (var item in inventoryView.sideInventoryView.inventoryItems)
         {
 
+            if (boxInventoryView.resource.Count == boxInventoryView.SizeInventory)
+            {
+                Debug.Log("full");
+            }
 
             if (item.GetComponent<InventoryItem>().id == "")
             {
@@ -59,27 +67,43 @@ public class InventoryItem : MonoBehaviour
 
     public void ThrowInInventory()
     {
-
-
-        foreach (var item in inventoryView.sideInventoryView.inventoryItems)
+        if (mainInventoryView.inventoryData.inventory.Count == mainInventoryView.SizeInventory - 1)
         {
-            if (item.GetComponent<InventoryItem>().id == "")
+            foreach (var item in inventoryView.sideInventoryView.inventoryItems)
             {
-                inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
-                takeObject.box.resource.Remove(id);
-                break;
-            }
-            if (item.GetComponent<InventoryItem>().id == id)
-            {
-                //inventoryData.inventory[id] = new ObjectData(int.Parse(item.GetComponent<InventoryItem>().textMeshProUGUI.text) + int.Parse(textMeshProUGUI.text), id);
-                inventoryData.inventory[id] = new ObjectData(int.Parse(textMeshProUGUI.text) + int.Parse(item.textMeshProUGUI.text), id);
-                takeObject.box.resource.Remove(id);
-                Debug.Log(item.GetComponent<InventoryItem>().id);
+                if (item.GetComponent<InventoryItem>().id == id)
+                {
+                    inventoryData.inventory[id] = new ObjectData(int.Parse(textMeshProUGUI.text) + int.Parse(item.textMeshProUGUI.text), id);
+                    takeObject.box.resource.Remove(id);
+                    Debug.Log(item.GetComponent<InventoryItem>().id);
 
-                //inventoryData.RemoveData(id, int.Parse(textMeshProUGUI.text));
-                break;
+                    break;
+                }
             }
         }
+        else
+        {
+            foreach (var item in inventoryView.sideInventoryView.inventoryItems)
+            {
+                if (item.GetComponent<InventoryItem>().id == "")
+                {
+                    inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+                    takeObject.box.resource.Remove(id);
+                    break;
+                }
+
+                if (item.GetComponent<InventoryItem>().id == id)
+                {
+                    inventoryData.inventory[id] = new ObjectData(int.Parse(textMeshProUGUI.text) + int.Parse(item.textMeshProUGUI.text), id);
+                    takeObject.box.resource.Remove(id);
+                    Debug.Log(item.GetComponent<InventoryItem>().id);
+
+                    break;
+                }
+            }
+
+        }
+
 
         inventory.SetActive(false);
         inventory.SetActive(true);
@@ -112,7 +136,7 @@ public class InventoryItem : MonoBehaviour
         if (takeObject.objInHand1 == null)
         {
             TakeInHand();
-            
+
         }
         else
         {
@@ -123,12 +147,12 @@ public class InventoryItem : MonoBehaviour
             Destroy(takeObject.objInHand2);
 
             TakeInHand();
-            
+
         }
 
         foreach (var item in items)
         {
-            if(item.id == id && item.typeObject == TypeObject.Build)
+            if (item.id == id && item.typeObject == TypeObject.Build)
             {
                 //objectBuild = item.gameObject;
                 //takeObject.isTake = false;
@@ -247,5 +271,4 @@ public class InventoryItem : MonoBehaviour
             }
         }
     }
-
 }

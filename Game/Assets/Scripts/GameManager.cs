@@ -74,8 +74,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("obj" + " " + takeObject.objInHand1.name);
 
         }
-
-        Debug.Log(viewObjectInHand);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (mainMenu.activeSelf == false)

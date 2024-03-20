@@ -11,6 +11,7 @@ public class TakeObject : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI nameBox;
     [SerializeField] public InventoryData inventoryData;
+    [SerializeField] private InventoryView inventoryView;
     [SerializeField] GameObject canvasBox;
     [SerializeField] public GameObject boxUIresource;
     Animator animator;
@@ -30,9 +31,6 @@ public class TakeObject : MonoBehaviour
 
     private void Update()
     {
-
-        
-
         currentCamera = GetComponent<Player1>().currentCamera;
         ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
         if (objInHand1 == null && isTake)
@@ -62,8 +60,7 @@ public class TakeObject : MonoBehaviour
                     }
 
                     
-                    inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>());
-                    Destroy(hitInfo.collider.gameObject);
+                    inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>(), hitInfo.collider.gameObject);
                     if (animator != null)
                     {
                         animator.SetTrigger("TakeObject");

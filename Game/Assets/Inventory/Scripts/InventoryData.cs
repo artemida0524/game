@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization.Json;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -41,14 +42,15 @@ public class InventoryData : MonoBehaviour
     private const string INVENTORY_PATH = "Inventory";
 
     public Dictionary<string, ObjectData> inventory = new Dictionary<string, ObjectData>();
+
     [SerializeField] public List<GameObject> subjects = new List<GameObject>();
+    [SerializeField] private InventoryView inventoryView;
     float timeOut = 0.5f;
     float time = 1f;
 
 
     private void Start()
     {
-
         if (PlayerPrefs.HasKey(INVENTORY_PATH))
         {
 
@@ -66,7 +68,6 @@ public class InventoryData : MonoBehaviour
 
             File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
         }
-
     }
 
     private void Update()
@@ -104,56 +105,33 @@ public class InventoryData : MonoBehaviour
         {
 
             inventory[key].count += data.count;
-
-
-
-            //InventoryDtoList list = new InventoryDtoList();
-            //list.data = new InventoryDto[inventory.Count];
-            //int iter = 0;
-
-            //foreach (var item in inventory)
-            //{
-
-            //    list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
-            //    iter++;
-            //    string json = JsonUtility.ToJson(list);
-
-
-            //    PlayerPrefs.SetString(INVENTORY_PATH, json);
-            //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
-
-
-            //}
-
         }
         else
         {
-            inventory.Add(key, data);
+            if(inventory.Count < inventoryView.SizeInventory - 1)
+            {
 
-
-            //InventoryDtoList list = new InventoryDtoList();
-            //list.data = new InventoryDto[inventory.Count];
-
-            //int iter = 0;
-
-            //foreach (var item in inventory)
-            //{
-
-            //    list.data[iter] = new InventoryDto(item.Value.id, item.Value.count);
-            //    iter++;
-            //    string json = JsonUtility.ToJson(list);
-
-
-            //    PlayerPrefs.SetString(INVENTORY_PATH, json);
-
-            //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", json);
-
-            //}
-
-
+                inventory.Add(key, data);
+            }
         }
     }
 
+    public void AddData(string key, ObjectData data, GameObject obj)
+    {
+        if (inventory.ContainsKey(key))
+        {
+            Destroy(obj);
+            inventory[key].count += data.count;
+        }
+        else
+        {
+            if (inventory.Count < inventoryView.SizeInventory - 1)
+            {
+                Destroy(obj);
+                inventory.Add(key, data);
+            }
+        }
+    }
 
     public void RemoveData(string key, int count)
     {
