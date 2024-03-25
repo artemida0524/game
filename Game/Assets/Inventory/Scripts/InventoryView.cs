@@ -34,11 +34,6 @@ public class InventoryView : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-
-    }
-
 
     private void OnEnable()
     {

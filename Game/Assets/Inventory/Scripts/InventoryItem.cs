@@ -15,9 +15,11 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] public Image image;
     [SerializeField] public TextMeshProUGUI textMeshProUGUI;
     [SerializeField] public string id;
+
     [SerializeField] public InventoryView inventoryView;
     [SerializeField] public InventoryView mainInventoryView;
     [SerializeField] public InventoryView boxInventoryView;
+
     [SerializeField] public GameObject[] target;
     [SerializeField] public GameObject inventory;
     [SerializeField] public InventoryData inventoryData;
@@ -63,6 +65,12 @@ public class InventoryItem : MonoBehaviour
         Debug.Log("enabled");
         inventory.SetActive(true);
 
+    }
+
+
+    public void ThrowInFurnace()
+    {
+        
     }
 
     public void ThrowInInventory()

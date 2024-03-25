@@ -17,6 +17,10 @@ public class TakeObject : MonoBehaviour
     Animator animator;
     public GameObject objInHand1;
     public BoxWithResource box;
+
+    private Furnace furnace;
+    [SerializeField] private GameObject furnaceCanvas;
+
     public GameObject objInHand2;
     Ray ray;
     [SerializeField] public Camera currentCamera;
@@ -65,8 +69,6 @@ public class TakeObject : MonoBehaviour
                     {
                         animator.SetTrigger("TakeObject");
                     }
-
-                    
                 }
 
                 if (hitInfo.collider.gameObject.layer == 11)
@@ -78,8 +80,13 @@ public class TakeObject : MonoBehaviour
                     boxUIresource.GetComponent<InventoryView>().resource = box.resource;
                     canvasBox.gameObject.SetActive(true);
                     isTake = false;
+                }
 
+                if(hitInfo.collider.gameObject.layer == 13)
+                {
+                    furnace = hitInfo.collider.GetComponent<Furnace>();
 
+                    furnaceCanvas.SetActive(true);
 
                 }
             }

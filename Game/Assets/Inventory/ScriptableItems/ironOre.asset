@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ironOre
   m_EditorClassIdentifier: 
   typeObject: 3
+  furnaceMode: 2
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 0

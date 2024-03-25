@@ -10,11 +10,19 @@ public enum TypeObject
     Build
 }
 
+public enum FurnaceMode
+{
+    None,
+    Fuel,
+    Resource
+}
+
 
 [CreateAssetMenu(fileName = "Item")]
 public class ScriptableItem : ScriptableObject
 {
     public TypeObject typeObject;
+    public FurnaceMode furnaceMode;
 
     public int SetHpIfFood;
     public int SetFoodIfFood;
