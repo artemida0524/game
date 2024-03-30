@@ -31,6 +31,18 @@ public class ButtonSelect : MonoBehaviour
         {
             for (int i = 0; i < countObjectResource.Length; i++)
             {
+
+                if (inventoryData.inventory.ContainsKey(currentName))
+                {
+                    isSelect = true;
+                }
+                else
+                {
+                    if (inventoryData.inventory.Count >= mainInventoryView.SizeInventory - 1)
+                    {
+                        isSelect = false;
+                    }
+                }
                 try
                 {
                     if (inventoryData.inventory[nameObjectResource[i]].count >= countObjectResource[i])
@@ -50,20 +62,7 @@ public class ButtonSelect : MonoBehaviour
                 }
 
             }
-
-            if (inventoryData.inventory.ContainsKey(currentName))
-            {
-                isSelect = true;
-            }
-            else
-            {
-                if (inventoryData.inventory.Count >= mainInventoryView.SizeInventory - 1)
-                {
-                    isSelect = false;
-                    Debug.Log("false");
-                }
-            }
-
+            Debug.Log(isSelect);
             if (isSelect)
             {
                 for (int i = 0; i < countObjectResource.Length; i++)

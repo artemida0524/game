@@ -7,6 +7,8 @@ using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { get; private set; }
+
     [SerializeField] private GameObject miniMapCamera;
     [SerializeField] private GameObject tree;
     [SerializeField] private GameObject bigStone;
@@ -25,12 +27,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject canvasBox;
     [SerializeField] private TakeObject takeObject;
     [SerializeField] private GameObject craftCanvas;
+    [SerializeField] private GameObject FurnaceCanvas;
     public GameObject lastObject;
     [SerializeField] private GameObject target1;
     [SerializeField] private GameObject target2;
     private bool isActive = false;
     public bool viewObjectInHand = false;
     private Vector3 newPosition;
+
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -240,9 +257,14 @@ public class GameManager : MonoBehaviour
     {
         canvas.gameObject.SetActive(false);
 
-
+        takeObject.isTake = true; 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void ForCanvasFurnace()
+    {
+        FurnaceCanvas.SetActive(false);
+        FurnaceCanvas.SetActive(true);
     }
 
 }

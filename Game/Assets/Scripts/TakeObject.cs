@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,10 +14,11 @@ public class TakeObject : MonoBehaviour
     [SerializeField] public InventoryData inventoryData;
     [SerializeField] private InventoryView inventoryView;
     [SerializeField] GameObject canvasBox;
-    [SerializeField] public GameObject boxUIresource;
+    [SerializeField] public GameObject boxUIResource;
+    [SerializeField] public GameObject furnaceUIResource;
     Animator animator;
     public GameObject objInHand1;
-    public BoxWithResource box;
+    [NonSerialized] public BoxWithResource box;
 
     private Furnace furnace;
     [SerializeField] private GameObject furnaceCanvas;
@@ -58,12 +60,12 @@ public class TakeObject : MonoBehaviour
                 if (hitInfo.collider.gameObject.layer == 3)
                 {
 
-                    if(hitInfo.collider.TryGetComponent(out ObjectOnGrass component))
+                    if (hitInfo.collider.TryGetComponent(out ObjectOnGrass component))
                     {
                         component.TP();
                     }
 
-                    
+
                     inventoryData.AddData(hitInfo.collider.GetComponent<ObjectData>().id, hitInfo.collider.GetComponent<ObjectData>(), hitInfo.collider.gameObject);
                     if (animator != null)
                     {
@@ -77,17 +79,21 @@ public class TakeObject : MonoBehaviour
                     box = hitInfo.collider.GetComponent<BoxWithResource>();
                     nameBox.text = box.name;
 
-                    boxUIresource.GetComponent<InventoryView>().resource = box.resource;
-                    canvasBox.gameObject.SetActive(true);
+                    boxUIResource.GetComponent<InventoryView>().resource = box.resource;
+                    canvasBox.SetActive(true);
                     isTake = false;
                 }
 
-                if(hitInfo.collider.gameObject.layer == 13)
+                if (hitInfo.collider.gameObject.layer == 13)
                 {
                     furnace = hitInfo.collider.GetComponent<Furnace>();
+                    furnaceUIResource.GetComponent<InventoryView>().furnace = furnace;
 
                     furnaceCanvas.SetActive(true);
 
+                    //furnaceUIResource.GetComponent<Furnace>() = furnace;
+
+                    //isTake = false;
                 }
             }
         }
@@ -105,12 +111,12 @@ public class TakeObject : MonoBehaviour
             objInHand1.GetComponent<MeshCollider>().enabled = true;
             try
             {
-            objInHand1.GetComponent<Animator>().enabled = false;
+                objInHand1.GetComponent<Animator>().enabled = false;
 
             }
             catch (System.Exception)
             {
-                
+
             }
 
             objInHand1.gameObject.layer = 3;

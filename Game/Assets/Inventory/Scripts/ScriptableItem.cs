@@ -24,6 +24,12 @@ public class ScriptableItem : ScriptableObject
     public TypeObject typeObject;
     public FurnaceMode furnaceMode;
 
+    public int countObjectForMerger;
+
+    public int secondFuseIfResource;
+    public int secondFuel;
+    public string idResultIfResource;
+
     public int SetHpIfFood;
     public int SetFoodIfFood;
     public int SetWaterIfFood;

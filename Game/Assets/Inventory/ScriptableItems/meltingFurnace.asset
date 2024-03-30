@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: meltingFurnace
   m_EditorClassIdentifier: 
   typeObject: 4
+  furnaceMode: 0
+  secondFuel: 0
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 0

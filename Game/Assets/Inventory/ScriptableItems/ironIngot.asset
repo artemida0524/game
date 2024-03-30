@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb112607b2816647ad36fd7ca81598a, type: 3}
-  m_Name: ironOre
+  m_Name: ironIngot
   m_EditorClassIdentifier: 
   typeObject: 3
   furnaceMode: 2
-  countObjectForMerger: 2
-  secondFuseIfResource: 60
+  countObjectForMerger: 0
+  secondFuseIfResource: 0
   secondFuel: 0
-  idResultIfResource: ironIngot
+  idResultIfResource: 
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 0
-  sprite: {fileID: 21300000, guid: 35e418005d351ee4c96e2597d7e9e6db, type: 3}
-  gameObject: {fileID: 173244815258485406, guid: adc4e9715fd9ed2468b081a19aed83bb, type: 3}
+  sprite: {fileID: 21300000, guid: 232133e99c7f6c3449a7c47cda49d6d5, type: 3}
+  gameObject: {fileID: 0}
   count: 0
-  id: ironOre
+  id: ironIngot

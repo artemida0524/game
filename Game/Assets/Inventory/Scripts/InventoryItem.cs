@@ -6,6 +6,7 @@ using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,9 +35,23 @@ public class InventoryItem : MonoBehaviour
         items = inventoryView.scriptableItemList.scriptableItems;
     }
 
+
+    public void ThrowInInventoryFromFurnace()
+    {
+        foreach (var item in items)
+        {
+            if (item.id == id)
+            {
+                inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+                inventoryView.furnace.ForThrow();
+                GameManager.instance.ForCanvasFurnace();
+            }
+        }
+    }
+
     public void ThrowInBox()
     {
-        Debug.Log(boxInventoryView.resource.Count  + " " + boxInventoryView.SizeInventory);
+        Debug.Log(boxInventoryView.resource.Count + " " + boxInventoryView.SizeInventory);
 
         foreach (var item in inventoryView.sideInventoryView.inventoryItems)
         {
@@ -68,10 +83,7 @@ public class InventoryItem : MonoBehaviour
     }
 
 
-    public void ThrowInFurnace()
-    {
-        
-    }
+
 
     public void ThrowInInventory()
     {

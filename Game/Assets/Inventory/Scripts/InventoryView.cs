@@ -7,6 +7,7 @@ public class InventoryView : MonoBehaviour
 {
     [SerializeField] public InventoryData inventoryData;
     public Dictionary<string, ObjectData> resource;
+    public Furnace furnace;
     [SerializeField] public InventoryItem[] inventoryItems;
     [SerializeField] public ScriptableItemList scriptableItemList;
     [SerializeField] public InventoryView sideInventoryView;
@@ -33,7 +34,6 @@ public class InventoryView : MonoBehaviour
         }
 
     }
-
 
     private void OnEnable()
     {

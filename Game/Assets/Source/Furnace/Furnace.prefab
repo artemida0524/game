@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4892,7 +4892,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9732,7 +9732,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -14660,6 +14660,7 @@ MonoBehaviour:
   particleSystemsFurnace:
   - {fileID: 4341548541319545921}
   - {fileID: 8354586669927472654}
+  timeUpdate: 0
 --- !u!1001 &7055194386476490413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14670,7 +14671,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6749016292054096620, guid: ea29b8230a8f93f4e8099f2f5b5f92b1, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749016292054096620, guid: ea29b8230a8f93f4e8099f2f5b5f92b1, type: 3}
       propertyPath: InitialModule.size3D

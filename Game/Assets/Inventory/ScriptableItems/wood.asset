@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeObject: 3
   furnaceMode: 1
+  countObjectForMerger: 0
+  secondFuseIfResource: 0
+  secondFuel: 5
+  idResultIfResource: 
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 0
