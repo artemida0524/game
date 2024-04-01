@@ -16,7 +16,7 @@ MonoBehaviour:
   furnaceMode: 1
   countObjectForMerger: 0
   secondFuseIfResource: 0
-  secondFuel: 5
+  secondFuel: 120
   idResultIfResource: 
   SetHpIfFood: 0
   SetFoodIfFood: 0

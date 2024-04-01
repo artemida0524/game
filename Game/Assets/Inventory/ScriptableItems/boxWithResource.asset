@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: boxWithResource
   m_EditorClassIdentifier: 
   typeObject: 4
+  furnaceMode: 0
+  countObjectForMerger: 0
+  secondFuseIfResource: 0
+  secondFuel: 0
+  idResultIfResource: 
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 0
@@ -20,3 +25,4 @@ MonoBehaviour:
   gameObject: {fileID: 9207571716963771254, guid: 1078eb436f3c62740afdf9e25d4b1e05, type: 3}
   count: 0
   id: boxWithResource
+  description: take take take

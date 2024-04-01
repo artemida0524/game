@@ -14,7 +14,8 @@ public enum FurnaceMode
 {
     None,
     Fuel,
-    Resource
+    Resource,
+    UpdateResource
 }
 
 
@@ -38,4 +39,8 @@ public class ScriptableItem : ScriptableObject
     public GameObject gameObject;
     public int count;
     public string id;
+
+
+    public string description;
+
 }

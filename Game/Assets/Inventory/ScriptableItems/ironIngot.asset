@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ironIngot
   m_EditorClassIdentifier: 
   typeObject: 3
-  furnaceMode: 2
+  furnaceMode: 3
   countObjectForMerger: 0
   secondFuseIfResource: 0
   secondFuel: 0

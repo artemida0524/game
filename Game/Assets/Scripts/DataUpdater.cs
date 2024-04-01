@@ -12,13 +12,15 @@ using UnityEngine.UI;
 
 public class DataUpdater : MonoBehaviour
 {
-    private TextMeshProUGUI time;
+    private TextMeshProUGUI timeFuel;
     [SerializeField] private TextMeshProUGUI timeResult;
     [SerializeField] private TextMeshProUGUI textMeshProUGUICountResource;
     [SerializeField] private TextMeshProUGUI textMeshProUGUICountFuel;
     [SerializeField] private TextMeshProUGUI textMeshProUGUICountResult;
 
     [SerializeField] private GameObject gameObjectResult;
+    [SerializeField] private GameObject gameObjectFuel;
+    [SerializeField] private GameObject gameObjectResource;
 
     [SerializeField] private Image imageResource;
     [SerializeField] private Image imageFuel;
@@ -29,19 +31,20 @@ public class DataUpdater : MonoBehaviour
 
     private void Start()
     {
-        time = GetComponent<TextMeshProUGUI>();
+        timeFuel = GetComponent<TextMeshProUGUI>();
     }
     private void Update()
     {
 
-        timeResult.text = $"{(int)inventoryView.furnace.timeResult}";
-        time.text = $"{(int)inventoryView.furnace.timeFuel}";
 
+        timeResult.text = TimeConvert(inventoryView.furnace.timeResult);
+        timeFuel.text = TimeConvert(inventoryView.furnace.timeFuel);
 
         //Resource
         if (inventoryView.furnace.countResource != 0)
         {
             textMeshProUGUICountResource.text = inventoryView.furnace.countResource.ToString();
+            gameObjectResource.GetComponent<InventoryItem>().id = inventoryView.furnace.idResource;
         }
         else
         {
@@ -54,6 +57,7 @@ public class DataUpdater : MonoBehaviour
         if (inventoryView.furnace.countFuel != 0)
         {
             textMeshProUGUICountFuel.text = inventoryView.furnace.countFuel.ToString();
+            gameObjectFuel.GetComponent<InventoryItem>().id = inventoryView.furnace.idFuel;
         }
         else
         {
@@ -68,7 +72,7 @@ public class DataUpdater : MonoBehaviour
             gameObjectResult.GetComponent<InventoryItem>().id = inventoryView.furnace.idResult;
             foreach (var item in inventoryView.scriptableItemList.scriptableItems)
             {
-                if(item.id == inventoryView.furnace.idResult)
+                if (item.id == inventoryView.furnace.idResult)
                 {
                     imageResult.sprite = item.sprite;
                 }
@@ -81,5 +85,11 @@ public class DataUpdater : MonoBehaviour
         }
 
     }
+
+    private string TimeConvert(float time)
+    {
+        return time != 0 ? $"{(int)time / 60}:{(int)time % 60}" : string.Empty;
+    }
+
 
 }

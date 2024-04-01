@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: bottleWater
   m_EditorClassIdentifier: 
   typeObject: 1
+  furnaceMode: 0
+  countObjectForMerger: 0
+  secondFuseIfResource: 0
+  secondFuel: 0
+  idResultIfResource: 
   SetHpIfFood: 0
   SetFoodIfFood: 0
   SetWaterIfFood: 50
@@ -20,3 +25,4 @@ MonoBehaviour:
   gameObject: {fileID: 8721120906378260229, guid: 9f483498038bc5649b5a563db3e58c41, type: 3}
   count: 0
   id: bottleWater
+  description: "\u043C\u043E\u0436\u043D\u0430 \u0432\u0438\u043F\u0438\u0442\u0438"

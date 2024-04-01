@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: apple
   m_EditorClassIdentifier: 
   typeObject: 1
+  furnaceMode: 0
+  countObjectForMerger: 0
+  secondFuseIfResource: 0
+  secondFuel: 0
+  idResultIfResource: 
   SetHpIfFood: 10
   SetFoodIfFood: 3
   SetWaterIfFood: 3
@@ -20,3 +25,4 @@ MonoBehaviour:
   gameObject: {fileID: 6169181730790054320, guid: 76e7a724af66a52488b4dda9dbdb2a2a, type: 3}
   count: 0
   id: apple
+  description: "\u043C\u043E\u0436\u043D\u0430 \u0441\u0445\u0430\u0432\u0430\u0442\u0438"

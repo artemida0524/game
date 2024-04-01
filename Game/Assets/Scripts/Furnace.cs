@@ -20,7 +20,7 @@ public class Furnace : MonoBehaviour
     //private bool isPlayParticle = false;
     private bool work = false;
     private bool isSelect = false;
-    private bool isSetResource = false;
+    public bool isSetResource = false;
 
     [NonSerialized] public string idResource = "";
     [NonSerialized] public int countResource = 0;
@@ -32,28 +32,54 @@ public class Furnace : MonoBehaviour
     [NonSerialized] public string idResult = "";
     [NonSerialized] public int countResult = 0;
     
-    public void ForThrow()
+    public void ForThrowForResult()
     {
         countResult = 0;
         idResult = "";
     }
 
+    public void ForThrowForFuel()
+    {
+        countFuel = 0;
+        idFuel = "";
+    }
+
+    public void ForThrowForResource()
+    {
+        countResource = 0;
+        idResource = "";
+
+        timeResult = 0;
+        isSetResource = false;
+    }
+
     private void Update()
     {
-        if (work)
+
+
+        if (work && countResource != 0/* && !isSetResource*/)
         {
-            SetFuel();
+
+            foreach (var item in scriptableItemList.scriptableItems)
+            {
+                if (idResource == item.id && countResource < item.countObjectForMerger)
+                {
+                    //work = false;
+
+                    isSetResource = false;
+                    break;
+                    //foreach (var item2 in particleSystemsFurnace)
+                    //{
+                    //    item2.Stop();
+                    //}
+                }
+                else
+                {
+                    isSetResource = true;
+                }
+            }
         }
 
-        if (isSetResource)
-        {
-            SetResource();
-        }
-
-        if (work && countResource != 0 && !isSetResource)
-        {
-            isSetResource = true;
-        }
 
         if (idFuel != "" && !work && countResource != 0)
         {
@@ -86,11 +112,26 @@ public class Furnace : MonoBehaviour
                 isSelect = false;
             }
         }
+
+        if (work)
+        {
+            SetFuel();
+        }
+
+        if (isSetResource)
+        {
+            SetResource();
+        }
     }
 
     private void SetFuel()
     {
         timeFuel -= Time.deltaTime;
+
+        if(countFuel == 0)
+        {
+            idFuel = "";
+        }
 
         if (timeFuel < 0)
         {
@@ -112,7 +153,22 @@ public class Furnace : MonoBehaviour
 
     private void SetResource()
     {
-        
+
+        //foreach (var item in scriptableItemList.scriptableItems)
+        //{
+        //    if (idResource == item.id && countResource < item.countObjectForMerger)
+        //    {
+        //        Debug.Log("BEMS");
+        //        //work = false;
+
+        //        isSetResource = false;
+        //        //foreach (var item2 in particleSystemsFurnace)
+        //        //{
+        //        //    item2.Stop();
+        //        //}
+        //    }
+        //}
+
         if (timeResult == 0)
         {
             foreach (var item in scriptableItemList.scriptableItems)
@@ -125,6 +181,10 @@ public class Furnace : MonoBehaviour
         }
         timeResult -= Time.deltaTime;
 
+        if (timeFuel <= 0)
+        {
+            isSetResource = false;
+        }
 
         if (timeResult < 0)
         {
@@ -150,22 +210,22 @@ public class Furnace : MonoBehaviour
                     {
                         idResource = "";
 
-                        work = false;
+                        //work = false;
 
-                        foreach (var item2 in particleSystemsFurnace)
-                        {
-                            item2.Stop();
-                        }
+                        //foreach (var item2 in particleSystemsFurnace)
+                        //{
+                        //    item2.Stop();
+                        //}
                     }
                     else if(countResource < item.countObjectForMerger)
                     {
-                        work = false;
+                        //work = false;
 
-
-                        foreach (var item2 in particleSystemsFurnace)
-                        {
-                            item2.Stop();
-                        }
+                        isSetResource = false;
+                        //foreach (var item2 in particleSystemsFurnace)
+                        //{
+                        //    item2.Stop();
+                        //}
                     }
                 }
             }

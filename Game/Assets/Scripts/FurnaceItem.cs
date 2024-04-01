@@ -60,6 +60,7 @@ public class FurnaceItem : MonoBehaviour
 
     public void ThrowInInventoryFromFurnace()
     {
+
         Debug.Log(inventoryItem.id);
     }
 
@@ -80,14 +81,19 @@ public class FurnaceItem : MonoBehaviour
                 }
                 else
                 {
-                    resourceImage.sprite = inventoryItem.image.sprite;
-                    resourceCount.text = inventoryItem.textMeshProUGUI.text;
+                    if (inventoryView.furnace.idResource != "")
+                    {
+                        inventoryView.inventoryData.AddData(inventoryView.furnace.idResource, new ObjectData(inventoryView.furnace.countResource, inventoryView.furnace.idResource));
 
-                    inventoryView.furnace.idResource = item.id;
-                    inventoryView.furnace.countResource = int.Parse(inventoryItem.textMeshProUGUI.text);
+                        ThrowResource(item);
+                    }
+                    else
+                    {
 
-                    inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
-                    StartCoroutine(SetFurnace());
+                        ThrowResource(item);
+                        StartCoroutine(SetFurnace());
+
+                    }
                 }
             }
             if (item.id == inventoryItem.id && item.furnaceMode == FurnaceMode.Fuel)
@@ -95,7 +101,6 @@ public class FurnaceItem : MonoBehaviour
 
                 if (inventoryView.furnace.idFuel == item.id)
                 {
-                    
                     inventoryView.furnace.countFuel += int.Parse(inventoryItem.textMeshProUGUI.text);
                     inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
 
@@ -105,36 +110,46 @@ public class FurnaceItem : MonoBehaviour
                 {
                     if (inventoryView.furnace.idFuel != "")
                     {
-                        Debug.Log("if");
                         inventoryView.inventoryData.AddData(inventoryView.furnace.idFuel, new ObjectData(inventoryView.furnace.countFuel, inventoryView.furnace.idFuel));
-
-                        fuelImage.sprite = inventoryItem.image.sprite;
-                        fuelCount.text = inventoryItem.textMeshProUGUI.text;
-
-                        inventoryView.furnace.idFuel = item.id;
-                        inventoryView.furnace.countFuel = int.Parse(inventoryItem.textMeshProUGUI.text);
-
-                        inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
-                        StartCoroutine(SetFurnace());
-
-
+                        ThrowFuel(item);
                     }
                     else
                     {
-                        Debug.Log("else");
-                        fuelImage.sprite = inventoryItem.image.sprite;
-                        fuelCount.text = inventoryItem.textMeshProUGUI.text;
-
-                        inventoryView.furnace.idFuel = item.id;
-                        inventoryView.furnace.countFuel = int.Parse(inventoryItem.textMeshProUGUI.text);
-
-                        inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
-                        StartCoroutine(SetFurnace());
+                        ThrowFuel(item);
                     }
 
                 }
             }
         }
+    }
+
+    private void ThrowResource(ScriptableItem item)
+    {
+        resourceImage.sprite = inventoryItem.image.sprite;
+        resourceCount.text = inventoryItem.textMeshProUGUI.text;
+
+        inventoryView.furnace.idResource = item.id;
+        inventoryView.furnace.countResource = int.Parse(inventoryItem.textMeshProUGUI.text);
+
+        inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
+
+        inventoryView.furnace.timeResult = 0;
+        inventoryView.furnace.isSetResource = false;
+
+        StartCoroutine(SetFurnace());
+    }
+
+    private void ThrowFuel(ScriptableItem item)
+    {
+        fuelImage.sprite = inventoryItem.image.sprite;
+        fuelCount.text = inventoryItem.textMeshProUGUI.text;
+
+
+        inventoryView.furnace.idFuel = item.id;
+        inventoryView.furnace.countFuel = int.Parse(inventoryItem.textMeshProUGUI.text);
+
+        inventoryView.inventoryData.RemoveData(inventoryItem.id, int.Parse(inventoryItem.textMeshProUGUI.text));
+        StartCoroutine(SetFurnace());
     }
 
     private void OnDisable()

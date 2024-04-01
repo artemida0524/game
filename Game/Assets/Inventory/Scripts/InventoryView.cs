@@ -93,6 +93,7 @@ public class InventoryView : MonoBehaviour
             item.image.color = color2;
             item.textMeshProUGUI.text = "";
             item.id = "";
+            item.descriptionPanel.SetActive(false);
         }
     }
 }

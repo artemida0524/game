@@ -267,4 +267,9 @@ public class GameManager : MonoBehaviour
         FurnaceCanvas.SetActive(true);
     }
 
+    public void EnabledCanvas(GameObject canvas)
+    {
+        canvas.SetActive(!canvas.activeSelf);
+    }
+    
 }

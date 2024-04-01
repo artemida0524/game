@@ -28,6 +28,10 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Player1 mainPlayer;
 
+    [SerializeField] public GameObject descriptionPanel;
+    [SerializeField] public TextMeshProUGUI descriptionName;
+    [SerializeField] public TextMeshProUGUI descriptionText;
+
     private ScriptableItem[] items;
 
     private void Start()
@@ -36,17 +40,38 @@ public class InventoryItem : MonoBehaviour
     }
 
 
-    public void ThrowInInventoryFromFurnace()
+    public void ThrowInInventoryFromFurnaceForResult()
     {
         foreach (var item in items)
         {
             if (item.id == id)
             {
                 inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
-                inventoryView.furnace.ForThrow();
+                inventoryView.furnace.ForThrowForResult();
                 GameManager.instance.ForCanvasFurnace();
             }
         }
+    }
+
+    public void ThrowInInventoryFromFurnaceForFuel()
+    {
+        Debug.Log(id);
+        foreach (var item in items)
+        {
+            if(item.id == id)
+            {
+                inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+                inventoryView.furnace.ForThrowForFuel();
+                GameManager.instance.ForCanvasFurnace();
+            }
+        }
+    }
+
+    public void ThrowInInventoryFromFurnaceForResource()
+    {
+        inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
+        inventoryView.furnace.ForThrowForResource();
+        GameManager.instance.ForCanvasFurnace();
     }
 
     public void ThrowInBox()
