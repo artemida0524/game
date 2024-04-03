@@ -108,7 +108,7 @@ public class InventoryData : MonoBehaviour
         }
         else
         {
-            if(inventory.Count < inventoryView.SizeInventory - 1)
+            if(inventory.Count < inventoryView.SizeInventory)
             {
 
                 inventory.Add(key, data);
@@ -125,7 +125,7 @@ public class InventoryData : MonoBehaviour
         }
         else
         {
-            if (inventory.Count < inventoryView.SizeInventory - 1)
+            if (inventory.Count < inventoryView.SizeInventory)
             {
                 Destroy(obj);
                 inventory.Add(key, data);

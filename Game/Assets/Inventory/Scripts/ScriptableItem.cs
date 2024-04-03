@@ -7,7 +7,8 @@ public enum TypeObject
     Food,
     Instrument,
     Resource,
-    Build
+    Build,
+    bagForCharacter
 }
 
 public enum FurnaceMode
@@ -40,6 +41,7 @@ public class ScriptableItem : ScriptableObject
     public int count;
     public string id;
 
+    public int countItemsBag;
 
     public string description;
 

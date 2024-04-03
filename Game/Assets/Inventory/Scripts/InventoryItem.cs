@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -58,7 +59,7 @@ public class InventoryItem : MonoBehaviour
         Debug.Log(id);
         foreach (var item in items)
         {
-            if(item.id == id)
+            if (item.id == id)
             {
                 inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
                 inventoryView.furnace.ForThrowForFuel();
@@ -72,6 +73,40 @@ public class InventoryItem : MonoBehaviour
         inventoryData.AddData(id, new ObjectData(int.Parse(textMeshProUGUI.text), id));
         inventoryView.furnace.ForThrowForResource();
         GameManager.instance.ForCanvasFurnace();
+    }
+
+
+    public void ThrowBagCharacterInInventory()
+    {
+        if (inventoryData.inventory.ContainsKey(id) && inventoryData.inventory.Count == InventoryView.DEFAULT_SIZE_INVENTORY)
+        {
+
+            inventoryData.AddData(inventoryView.bag.inventoryItem.id, new ObjectData(1, inventoryView.bag.inventoryItem.id));
+            inventoryView.bag.inventoryItem.id = string.Empty;
+
+
+            Destroy(inventoryView.bag.currentBag);
+
+            inventory.SetActive(false);
+            inventory.SetActive(true);
+
+            return;
+        }
+
+        if (inventoryData.inventory.Count < InventoryView.DEFAULT_SIZE_INVENTORY)
+        {
+            inventoryData.AddData(inventoryView.bag.inventoryItem.id, new ObjectData(1, inventoryView.bag.inventoryItem.id));
+            inventoryView.bag.inventoryItem.id = string.Empty;
+
+
+
+            Destroy(inventoryView.bag.currentBag);
+
+
+            inventory.SetActive(false);
+            inventory.SetActive(true);
+            return;
+        }
     }
 
     public void ThrowInBox()
@@ -112,8 +147,11 @@ public class InventoryItem : MonoBehaviour
 
     public void ThrowInInventory()
     {
-        if (mainInventoryView.inventoryData.inventory.Count == mainInventoryView.SizeInventory - 1)
+        Debug.Log(mainInventoryView.SizeInventory);
+
+        if (mainInventoryView.inventoryData.inventory.Count == mainInventoryView.SizeInventory)
         {
+            Debug.Log("IF");
             foreach (var item in inventoryView.sideInventoryView.inventoryItems)
             {
                 if (item.GetComponent<InventoryItem>().id == id)
@@ -128,6 +166,7 @@ public class InventoryItem : MonoBehaviour
         }
         else
         {
+            Debug.Log("elswe");
             foreach (var item in inventoryView.sideInventoryView.inventoryItems)
             {
                 if (item.GetComponent<InventoryItem>().id == "")
@@ -199,46 +238,10 @@ public class InventoryItem : MonoBehaviour
         {
             if (item.id == id && item.typeObject == TypeObject.Build)
             {
-                //objectBuild = item.gameObject;
-                //takeObject.isTake = false;
-                //Debug.Log(item.id);
                 mainPlayer.Build(item.gameObject);
-
-
-                //inventory.SetActive(false);
             }
         }
-        //Ray ray = new Ray(currentCamera.transform.position, currentCamera.transform.forward);
 
-        //if (Input.GetKeyDown(KeyCode.I) && !booltest)
-        //{
-        //    booltest = true;
-        //    objTest = Instantiate(objTest, new Vector3(0, 0, 0), objTest.transform.rotation);
-        //    objTest.GetComponent<BoxCollider>().enabled = false;
-        //    takeObject.isTake = false;
-        //}
-
-
-        //if (Physics.Raycast(ray, out RaycastHit hitInfo, takeObject.maxDistance) && booltest)
-        //{
-        //    objTest.transform.position = hitInfo.point;
-        //    objTest.transform.position += new Vector3(0, 0.4f, 0);
-
-        //    if (Input.GetKey(KeyCode.Z))
-        //    {
-        //        objTest.transform.Rotate(new Vector3(0, 0, -40) * Time.deltaTime);
-        //    }
-        //    if (Input.GetKey(KeyCode.X))
-        //    {
-        //        objTest.transform.Rotate(new Vector3(0, 0, 40) * Time.deltaTime);
-        //    }
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        booltest = false;
-        //        objTest.GetComponent<BoxCollider>().enabled = true;
-        //        takeObject.isTake = true;
-        //    }
-        //}
     }
 
     private void TakeInHand()
@@ -313,7 +316,50 @@ public class InventoryItem : MonoBehaviour
                     inventory.SetActive(false);
                     takeObject.isTake = false;
                 }
+
+
+                if (item.typeObject == TypeObject.bagForCharacter)
+                {
+                    if(inventoryView.bag.inventoryItem.id == item.id)
+                    {
+                        Debug.Log("identity");
+                    }
+                    else
+                    {
+                        inventoryView.bag.inventoryItem.id = item.id;
+                        inventoryData.RemoveData(id, 1);
+
+
+                        foreach (var item1 in inventoryView.scriptableItemList.scriptableItems)
+                        {
+                            if (id == item.id)
+                            {
+                                GameObject newBag = Instantiate(item.gameObject, inventoryView.bag.targetBag.transform.position, Quaternion.identity);
+                                newBag.GetComponentInChildren<MeshCollider>().enabled = false;
+                                newBag.GetComponent<Rigidbody>().isKinematic = true;
+
+                                newBag.transform.parent = inventoryView.bag.targetBag.transform;
+
+                                newBag.transform.localRotation = inventoryView.bag.targetBag.transform.localRotation;
+
+                                inventoryView.bag.currentBag = newBag;
+
+                            }
+                            break;
+                        } 
+                    }
+
+                    StartCoroutine(SetInventory());
+                }
+
             }
         }
+    }
+
+    private IEnumerator SetInventory()
+    {
+        yield return new WaitForSeconds(0.01f);
+        inventory.SetActive(false);
+        inventory.SetActive(true);
     }
 }

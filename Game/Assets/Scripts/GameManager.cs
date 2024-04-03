@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] private GameObject inventory;
+    [SerializeField] private InventoryBag bagCharacter;
     [SerializeField] private InventoryData inventoryData;
     private ScriptableItem[] items;
     [SerializeField] InventoryView inventoryView;
@@ -53,7 +54,29 @@ public class GameManager : MonoBehaviour
     {
         items = inventoryView.scriptableItemList.scriptableItems;
 
-        for (int i = 0; i < 20; i++)
+        if (PlayerPrefs.HasKey(InventoryBag.NAME_BAG) && PlayerPrefs.GetString(InventoryBag.NAME_BAG) != string.Empty)
+        {
+            bagCharacter.inventoryItem.id = PlayerPrefs.GetString(InventoryBag.NAME_BAG);
+
+            foreach (var item in bagCharacter.inventoryItem.inventoryView.scriptableItemList.scriptableItems)
+            {
+                if (bagCharacter.inventoryItem.id == item.id)
+                {
+                    GameObject newBag = Instantiate(item.gameObject, bagCharacter.targetBag.transform.position, Quaternion.identity);
+                    newBag.GetComponentInChildren<MeshCollider>().enabled = false;
+                    newBag.GetComponent<Rigidbody>().isKinematic = true;
+
+                    newBag.transform.parent = bagCharacter.targetBag.transform;
+
+                    newBag.transform.localRotation = bagCharacter.targetBag.transform.localRotation;
+
+                    bagCharacter.currentBag = newBag;
+
+                }
+            }
+        }
+
+            for (int i = 0; i < 20; i++)
         {
             newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
             Instantiate(tree, newPosition, Quaternion.identity);
@@ -111,12 +134,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    File.WriteAllText(Application.persistentDataPath + "/mazafaka.json", "");
-        //    inventoryData.inventory.Clear();
-        //    PlayerPrefs.DeleteKey("Inventory");
-        //}
+
 
         if (Input.GetKeyDown(KeyCode.C))
         {

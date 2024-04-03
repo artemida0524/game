@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using UnityEngine;
 
 public class InventoryView : MonoBehaviour
 {
+    public const int DEFAULT_SIZE_INVENTORY = 10;
+
     [SerializeField] public InventoryData inventoryData;
     public Dictionary<string, ObjectData> resource;
     public Furnace furnace;
     [SerializeField] public InventoryItem[] inventoryItems;
+    [SerializeField] public InventoryBag bag;
     [SerializeField] public ScriptableItemList scriptableItemList;
     [SerializeField] public InventoryView sideInventoryView;
     [SerializeField] public GameObject mainInventory;
@@ -19,14 +23,25 @@ public class InventoryView : MonoBehaviour
     private Color color1 = new Color(255, 255, 255, 255);
     private Color color2 = new Color(255, 255, 255, 0);
 
+    private bool isInitialization = true;
+
+    private string currentBoxCharacter = string.Empty;
+
     private void Awake()
     {
+        if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
+        {
+            Debug.Log("box");
+            return;
+        }
+        Debug.Log("awake" + " " + name);
         try
         {
             inventoryItems = GetComponentsInChildren<InventoryItem>();
-            sizeInventory = inventoryItems.Length;
-            mainInventory.SetActive(false);
 
+            //sizeInventory = inventoryItems.Length;
+
+            SetBagCharacter();
         }
         catch (System.Exception)
         {
@@ -35,27 +50,92 @@ public class InventoryView : MonoBehaviour
 
     }
 
+    private void SetBagCharacter()
+    {
+        if (bag.inventoryItem.id != string.Empty)
+        {
+            foreach (var item in scriptableItemList.scriptableItems)
+            {
+                if (bag.inventoryItem.id == item.id)
+                {
+                    sizeInventory = DEFAULT_SIZE_INVENTORY + item.countItemsBag;
+                }
+            }
+        }
+        else
+        {
+            sizeInventory = DEFAULT_SIZE_INVENTORY;
+        }
+        //mainInventory.SetActive(false);
+        currentBoxCharacter = bag.inventoryItem.id;
+    }
+
+    private void Start()
+    {
+
+    }
+
     private void OnEnable()
     {
+
+
+
+        if (isInitialization)
+        {
+            Awake();
+            OnDisable();
+            isInitialization = false;
+        }
+
+        if (!TryGetComponent<BoxWithResource>(out BoxWithResource component2))
+        {
+            if (currentBoxCharacter != bag.inventoryItem.id)
+            {
+                Debug.Log("Set" + " " + name);
+                SetBagCharacter();
+            }
+
+        }
+
+        if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
+        {
+            
+            inventoryItems = GetComponentsInChildren<InventoryItem>();
+            sizeInventory = inventoryItems.Length;
+        }
+
         try
         {
             interactorForObjects.isInteractor = false;
         }
         catch { }
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
         if (inventoryData != null)
         {
             resource = inventoryData.inventory;
         }
-        //mainCharacter.GetComponent<Player1>().enabled = false;
-        inventoryItems = GetComponentsInChildren<InventoryItem>();
+
+        if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
+        {
+            for (int i = 0; i < sizeInventory; i++)
+            {
+                inventoryItems[i].gameObject.SetActive(true);
+            }
+
+        }
+
 
         int iter = 0;
         foreach (var item in resource)
         {
+
             if (item.Key != "")
             {
+
+
                 inventoryItems[iter].image.color = color1;
                 inventoryItems[iter].id = item.Value.id;
                 inventoryItems[iter].textMeshProUGUI.text = item.Value.count.ToString();
@@ -76,6 +156,8 @@ public class InventoryView : MonoBehaviour
         //{
         //    Debug.Log(item.id + " " + item.textMeshProUGUI.text);
         //}
+
+        
     }
 
     private void OnDisable()
@@ -90,12 +172,28 @@ public class InventoryView : MonoBehaviour
         //mainCharacter.GetComponent<Player1>().enabled = true;
         foreach (var item in inventoryItems)
         {
+
+            if (item.gameObject.TryGetComponent<InventoryBag>(out InventoryBag component))
+            {
+                continue;
+            }
+
             item.image.color = color2;
             item.textMeshProUGUI.text = "";
             item.id = "";
+
+            if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
+            {
+                item.gameObject.SetActive(false);
+            }
+
             try
             {
-                item.descriptionPanel.SetActive(false);
+                foreach (var item1 in inventoryItems)
+                {
+                    item1.gameObject.GetComponent<PointerButton>().lead = false;
+                    item1.gameObject.GetComponent<PointerButton>().time = 0f;
+                }
 
             }
             catch (System.Exception)

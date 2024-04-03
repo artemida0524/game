@@ -7,8 +7,8 @@ public class PointerButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     private InventoryItem inventoryItem;
     private ScriptableItemList scriptableItemList;
-    private bool lead = false;
-    private float time = 0f;
+    public bool lead = false;
+    public float time = 0f;
     private float timeOut = 1f;
 
 

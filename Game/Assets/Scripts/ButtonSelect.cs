@@ -38,7 +38,7 @@ public class ButtonSelect : MonoBehaviour
                 }
                 else
                 {
-                    if (inventoryData.inventory.Count >= mainInventoryView.SizeInventory - 1)
+                    if (inventoryData.inventory.Count >= mainInventoryView.SizeInventory)
                     {
                         isSelect = false;
                     }

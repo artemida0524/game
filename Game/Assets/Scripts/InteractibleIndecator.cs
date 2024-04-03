@@ -58,9 +58,9 @@ public class InteractibleIndecator : MonoBehaviour
             }
         }
 
-        //itemsIndecator[0].count.text = "100"; //health
-        //itemsIndecator[1].count.text = "100";  //food
-        //itemsIndecator[2].count.text = "100";  //water
+        itemsIndecator[0].count.text = "100"; //health
+        itemsIndecator[1].count.text = "100";  //food
+        itemsIndecator[2].count.text = "100";  //water
 
     }
 
