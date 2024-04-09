@@ -17,6 +17,7 @@ public class BoxWithResource : MonoBehaviour
 
     [SerializeField] string[] nameObj;
     [SerializeField] int[] countObj;
+    [SerializeField] public int sizeBox;
 
     public string name;
 

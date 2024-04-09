@@ -141,6 +141,11 @@ public class InteractorForObjects : MonoBehaviour
                                     timeFood = 0;
                                 }
 
+                                if (item.typeObject == TypeObject.Weapon)
+                                {
+                                    Debug.Log("weapon");
+                                }
+
                             }
 
                         }

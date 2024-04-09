@@ -352,6 +352,40 @@ public class InventoryItem : MonoBehaviour
                     StartCoroutine(SetInventory());
                 }
 
+                if (item.typeObject == TypeObject.Weapon)
+                {
+                    GameObject obj1 = Instantiate(item.gameObject, target[0].transform.position, item.gameObject.transform.rotation);
+                    GameObject obj2 = Instantiate(item.gameObject, target[1].transform.position, Quaternion.identity);
+
+                    obj1.transform.parent = target[0].transform;
+                    obj2.transform.parent = target[1].transform;
+
+                    obj1.transform.localEulerAngles = new Vector3(1.2f, 256f, 167f);
+                    obj1.transform.localPosition = new Vector3(0.134f, 0.077f, 0.067f);
+                    obj2.transform.localEulerAngles = item.gameObject.transform.localEulerAngles;
+
+                    obj1.GetComponent<Rigidbody>().isKinematic = true;
+
+                    obj1.GetComponent<MeshCollider>().enabled = false;
+
+                    gameManager.lastObject = item.gameObject;
+                    gameManager.viewObjectInHand = false;
+
+
+                    obj2.GetComponent<Rigidbody>().isKinematic = true;
+                    obj2.GetComponent<MeshCollider>().enabled = false;
+
+                    obj1.gameObject.layer = 7;
+                    obj2.gameObject.layer = 6;
+
+                    inventoryData.RemoveData(item.id, 1);
+
+                    takeObject.objInHand1 = obj1;
+                    takeObject.objInHand2 = obj2;
+                    inventory.SetActive(false);
+                    takeObject.isTake = false;
+                }
+
             }
         }
     }

@@ -86,10 +86,14 @@ public class DataUpdater : MonoBehaviour
 
     }
 
-    private string TimeConvert(float time)
+    public string TimeConvert(float time)
     {
         return time != 0 ? $"{(int)time / 60}:{(int)time % 60}" : string.Empty;
     }
 
+    public static string TimeConvert(int time)
+    {
+        return time != 0 ? $"{time / 60}:{time % 60}" : string.Empty;
+    }
 
 }

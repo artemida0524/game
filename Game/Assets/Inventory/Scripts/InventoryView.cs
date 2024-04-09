@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -8,16 +9,19 @@ public class InventoryView : MonoBehaviour
 {
     public const int DEFAULT_SIZE_INVENTORY = 10;
 
+    
+
     [SerializeField] public InventoryData inventoryData;
     public Dictionary<string, ObjectData> resource;
     public Furnace furnace;
     [SerializeField] public InventoryItem[] inventoryItems;
+    [SerializeField] public TakeObject takeObject;
     [SerializeField] public InventoryBag bag;
     [SerializeField] public ScriptableItemList scriptableItemList;
     [SerializeField] public InventoryView sideInventoryView;
     [SerializeField] public GameObject mainInventory;
     private int sizeInventory;
-    public int SizeInventory { get => sizeInventory; }
+    public int SizeInventory { get => sizeInventory; set { sizeInventory = value; } }
     [SerializeField] private GameObject mainCharacter;
     [SerializeField] private InteractorForObjects interactorForObjects;
     private Color color1 = new Color(255, 255, 255, 255);
@@ -25,16 +29,24 @@ public class InventoryView : MonoBehaviour
 
     private bool isInitialization = true;
 
-    private string currentBoxCharacter = string.Empty;
+    private string currentBagCharacter = string.Empty;
+
+    private void Start()
+    {
+        
+    }
 
     private void Awake()
     {
+
+        
         if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
         {
-            Debug.Log("box");
+            sizeInventory = takeObject.box.sizeBox;
+            inventoryItems = GetComponentsInChildren<InventoryItem>();
+            Debug.Log("awake" + " " + name);
             return;
         }
-        Debug.Log("awake" + " " + name);
         try
         {
             inventoryItems = GetComponentsInChildren<InventoryItem>();
@@ -58,7 +70,7 @@ public class InventoryView : MonoBehaviour
             {
                 if (bag.inventoryItem.id == item.id)
                 {
-                    sizeInventory = DEFAULT_SIZE_INVENTORY + item.countItemsBag;
+                    sizeInventory = DEFAULT_SIZE_INVENTORY + item.countItemsBag;    
                 }
             }
         }
@@ -67,29 +79,31 @@ public class InventoryView : MonoBehaviour
             sizeInventory = DEFAULT_SIZE_INVENTORY;
         }
         //mainInventory.SetActive(false);
-        currentBoxCharacter = bag.inventoryItem.id;
-    }
-
-    private void Start()
-    {
-
+        currentBagCharacter = bag.inventoryItem.id;
     }
 
     private void OnEnable()
     {
 
 
-
         if (isInitialization)
         {
+
             Awake();
             OnDisable();
             isInitialization = false;
+            Debug.Log(SizeInventory + " " + name);
+        }
+
+        
+        if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
+        {
+            sizeInventory = takeObject.box.sizeBox;
         }
 
         if (!TryGetComponent<BoxWithResource>(out BoxWithResource component2))
         {
-            if (currentBoxCharacter != bag.inventoryItem.id)
+            if (currentBagCharacter != bag.inventoryItem.id)
             {
                 Debug.Log("Set" + " " + name);
                 SetBagCharacter();
@@ -97,12 +111,12 @@ public class InventoryView : MonoBehaviour
 
         }
 
-        if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
-        {
-            
-            inventoryItems = GetComponentsInChildren<InventoryItem>();
-            sizeInventory = inventoryItems.Length;
-        }
+        //if (TryGetComponent<BoxWithResource>(out BoxWithResource component))
+        //{
+
+        //    inventoryItems = GetComponentsInChildren<InventoryItem>();
+        //    sizeInventory = inventoryItems.Length;
+        //}
 
         try
         {
@@ -118,14 +132,14 @@ public class InventoryView : MonoBehaviour
             resource = inventoryData.inventory;
         }
 
-        if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
+        //if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
+        //{
+        for (int i = 0; i < sizeInventory; i++)
         {
-            for (int i = 0; i < sizeInventory; i++)
-            {
-                inventoryItems[i].gameObject.SetActive(true);
-            }
-
+            inventoryItems[i].gameObject.SetActive(true);
         }
+
+        //}
 
 
         int iter = 0;
@@ -157,7 +171,7 @@ public class InventoryView : MonoBehaviour
         //    Debug.Log(item.id + " " + item.textMeshProUGUI.text);
         //}
 
-        
+
     }
 
     private void OnDisable()
@@ -182,10 +196,10 @@ public class InventoryView : MonoBehaviour
             item.textMeshProUGUI.text = "";
             item.id = "";
 
-            if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
-            {
-                item.gameObject.SetActive(false);
-            }
+            //if (!TryGetComponent<BoxWithResource>(out BoxWithResource component1))
+            //{
+            item.gameObject.SetActive(false);
+            //}
 
             try
             {

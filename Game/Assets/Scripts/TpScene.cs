@@ -6,18 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class TpScene : MonoBehaviour
 {
-    public string mainScene = "Terrain";
-    
-    
+
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "TpPressToMainScene")
+        Scene scene = SceneManager.GetActiveScene();
+        if (other.tag == "Player")
         {
-            SceneManager.LoadScene("Terrain");
+
+            if (scene.name != "MainScene")
+            {
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+
         }
-        if(other.gameObject.name == "TpMainSceneToPress")
-        {
-            SceneManager.LoadScene("Press");
-        }
+
+
     }
+
 }

@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
+    
+    private const string PATH_TIME_IN_GAME_ALL_TIME = "timeInGame";
 
     [SerializeField] private GameObject miniMapCamera;
     [SerializeField] private GameObject tree;
@@ -19,6 +23,7 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject bodySkeleton;
     [SerializeField] private InventoryBag bagCharacter;
     [SerializeField] private InventoryData inventoryData;
     private ScriptableItem[] items;
@@ -39,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,13 +57,37 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        bodySkeleton.SetActive(false);
+
+
         items = inventoryView.scriptableItemList.scriptableItems;
+
+        //if (PlayerPrefs.HasKey(InventoryBag.NAME_BAG))
+        //{
+
+        //    string nameBag = PlayerPrefs.GetString(InventoryBag.NAME_BAG);
+        //    foreach (var item in inventoryView.scriptableItemList.scriptableItems)
+        //    {
+        //        if (item.id == nameBag)
+        //        {
+        //            //item.countItemsBag
+        //            inventoryView.OnInitializationInventory.Invoke(this, item.countItemsBag + InventoryView.DEFAULT_SIZE_INVENTORY);
+
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    inventoryView.OnInitializationInventory.Invoke(this, InventoryView.DEFAULT_SIZE_INVENTORY);
+        //}
+
+
 
         if (PlayerPrefs.HasKey(InventoryBag.NAME_BAG) && PlayerPrefs.GetString(InventoryBag.NAME_BAG) != string.Empty)
         {
             bagCharacter.inventoryItem.id = PlayerPrefs.GetString(InventoryBag.NAME_BAG);
 
-            foreach (var item in bagCharacter.inventoryItem.inventoryView.scriptableItemList.scriptableItems)
+            foreach (var item in inventoryView.scriptableItemList.scriptableItems)
             {
                 if (bagCharacter.inventoryItem.id == item.id)
                 {
@@ -72,41 +101,50 @@ public class GameManager : MonoBehaviour
 
                     bagCharacter.currentBag = newBag;
 
+
+                    inventoryView.SizeInventory = item.countItemsBag + InventoryView.DEFAULT_SIZE_INVENTORY;
+
                 }
             }
         }
-
-            for (int i = 0; i < 20; i++)
+        else
         {
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(tree, newPosition, Quaternion.identity);
-
-
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(bigStone, newPosition, Quaternion.identity);
-
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(fiber, newPosition, Quaternion.identity);
-
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(bigIronOre, newPosition, Quaternion.identity);
-
+            inventoryView.SizeInventory = InventoryView.DEFAULT_SIZE_INVENTORY;
         }
-        for (int i = 0; i < 50; i++)
-        {
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(wood, newPosition, Quaternion.identity);
 
-            newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
-            Instantiate(stone, newPosition, Quaternion.identity);
-        }
+        //for (int i = 0; i < 20; i++)
+        //{
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(tree, newPosition, Quaternion.identity);
+
+        
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(bigStone, newPosition, Quaternion.identity);
+
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(fiber, newPosition, Quaternion.identity);
+
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(bigIronOre, newPosition, Quaternion.identity);
+
+        //}
+        //for (int i = 0; i < 50; i++)
+        //{
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(wood, newPosition, Quaternion.identity);
+
+        //    newPosition = new Vector3(Random.Range(0.0f, 439.0f), 50.0f, Random.Range(56.0f, 447.0f));
+        //    Instantiate(stone, newPosition, Quaternion.identity);
+        //}
     }
+
+
 
     private void Update()
     {
         if (lastObject != null)
         {
-            Debug.Log( "last"+ " " + lastObject.name);
+            Debug.Log("last" + " " + lastObject.name);
 
         }
         if (takeObject.objInHand1 != null)
@@ -203,34 +241,38 @@ public class GameManager : MonoBehaviour
             Debug.Log("r");
             if (lastObject != null)
             {
-                viewObjectInHand = !viewObjectInHand;
-                Debug.Log("RRRRRR");
-                GameObject obj1 = Instantiate(lastObject, target1.transform.position, lastObject.gameObject.transform.rotation);
-                GameObject obj2 = Instantiate(lastObject, target2.transform.position, Quaternion.identity);
+                if (inventoryData.inventory.ContainsKey(lastObject.GetComponent<ObjectData>().id))
+                {
 
-                obj1.transform.parent = target1.transform;
-                obj2.transform.parent = target2.transform;
+                    viewObjectInHand = !viewObjectInHand;
 
-                obj1.transform.localEulerAngles = new Vector3(1.2f, 256f, 167f);
-                obj1.transform.localPosition = new Vector3(0.134f, 0.077f, 0.067f);
-                obj2.transform.localEulerAngles = lastObject.gameObject.transform.localEulerAngles;
+                    GameObject obj1 = Instantiate(lastObject, target1.transform.position, lastObject.gameObject.transform.rotation);
+                    GameObject obj2 = Instantiate(lastObject, target2.transform.position, Quaternion.identity);
 
-                obj1.GetComponent<Rigidbody>().isKinematic = true;
+                    obj1.transform.parent = target1.transform;
+                    obj2.transform.parent = target2.transform;
 
-                obj1.GetComponent<MeshCollider>().enabled = false;
+                    obj1.transform.localEulerAngles = new Vector3(1.2f, 256f, 167f);
+                    obj1.transform.localPosition = new Vector3(0.134f, 0.077f, 0.067f);
+                    obj2.transform.localEulerAngles = lastObject.gameObject.transform.localEulerAngles;
 
-                obj2.GetComponent<Rigidbody>().isKinematic = true;
-                obj2.GetComponent<MeshCollider>().enabled = false;
+                    obj1.GetComponent<Rigidbody>().isKinematic = true;
 
-                obj1.gameObject.layer = 7;
-                obj2.gameObject.layer = 6;
+                    obj1.GetComponent<MeshCollider>().enabled = false;
 
-                inventoryData.RemoveData(lastObject.GetComponent<ObjectData>().id, 1);
+                    obj2.GetComponent<Rigidbody>().isKinematic = true;
+                    obj2.GetComponent<MeshCollider>().enabled = false;
 
-                takeObject.objInHand1 = obj1;
-                takeObject.objInHand2 = obj2;
-                inventory.SetActive(false);
-                takeObject.isTake = false;
+                    obj1.gameObject.layer = 7;
+                    obj2.gameObject.layer = 6;
+
+                    inventoryData.RemoveData(lastObject.GetComponent<ObjectData>().id, 1);
+
+                    takeObject.objInHand1 = obj1;
+                    takeObject.objInHand2 = obj2;
+                    inventory.SetActive(false);
+                    takeObject.isTake = false;
+                }
 
             }
         }
@@ -241,14 +283,14 @@ public class GameManager : MonoBehaviour
         {
             if (!isActive)
             {
-
+                takeObject.isTake = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 //mainCharacter.GetComponent<FPSController>().enabled = false;
             }
             if (isActive)
             {
-
+                takeObject.isTake = true;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 //mainCharacter.GetComponent<FPSController>().enabled = true;
@@ -275,7 +317,7 @@ public class GameManager : MonoBehaviour
     {
         canvas.gameObject.SetActive(false);
 
-        takeObject.isTake = true; 
+        takeObject.isTake = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -289,5 +331,25 @@ public class GameManager : MonoBehaviour
     {
         canvas.SetActive(!canvas.activeSelf);
     }
+
+
     
+
+    private void OnApplicationQuit()
+    {
+        if (PlayerPrefs.HasKey(PATH_TIME_IN_GAME_ALL_TIME))
+        {
+            PlayerPrefs.SetInt(PATH_TIME_IN_GAME_ALL_TIME, PlayerPrefs.GetInt(PATH_TIME_IN_GAME_ALL_TIME) + (int)Time.time);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(PATH_TIME_IN_GAME_ALL_TIME,(int)Time.time);
+        }
+
+        Debug.Log("time: " + DataUpdater.TimeConvert(PlayerPrefs.GetInt(PATH_TIME_IN_GAME_ALL_TIME)));
+
+        
+
+    }
+
 }
