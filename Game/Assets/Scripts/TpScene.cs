@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class TpScene : MonoBehaviour
 {
 
-
+    public string currentScene;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,14 +15,21 @@ public class TpScene : MonoBehaviour
         if (other.tag == "Player")
         {
 
-            if (scene.name != "MainScene")
-            {
-                SceneManager.LoadScene(0);
-            }
-            else
-            {
-                SceneManager.LoadScene(1);
-            }
+            //if (scene.name != "MainScene")
+            //{
+
+            //    SceneManager.LoadScene(0);
+
+
+            //}
+            //else
+            //{
+            //    GameManagerGlobalScene.lastVisitesScene = currentScene;
+            //    SceneManager.LoadScene(1);
+            //}
+
+            GameManagerGlobalScene.lastVisitesScene = currentScene;
+            SceneManager.LoadScene(1);
 
         }
 

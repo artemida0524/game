@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
@@ -122,7 +123,7 @@ public class InteractibleIndecator : MonoBehaviour
 
         }
 
-        if(isRevival)
+        if (isRevival)
         {
             if (isRevivalAnimation)
             {
@@ -157,7 +158,7 @@ public class InteractibleIndecator : MonoBehaviour
 
         deathImage.color = eclipse;
 
-        if(eclipse.a >= 1)
+        if (eclipse.a >= 1)
         {
             eclipse.a = 1;
 
@@ -177,35 +178,46 @@ public class InteractibleIndecator : MonoBehaviour
 
     private void Revival()
     {
-        mainPlayer.transform.position = new Vector3(74.55f, 9.77f, 480.33f);
+        Scene currentScene = SceneManager.GetActiveScene();
 
-        takeObject.inventoryData.inventory.Clear();
-        takeObject.isTake = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        buttonRevival.SetActive(false);
-
-        eclipse -= new Color(0, 0, 0, Time.deltaTime * 0.3f);
-
-        deathImage.color = eclipse;
-
-        itemsIndecator[1].count.text = "100";
-        itemsIndecator[2].count.text = "100";
-
-        Destroy(takeObject.objInHand1);
-
-        Destroy(takeObject.objInHand2);
-
-        takeObject.objInHand1 = null;
-        takeObject.objInHand2 = null;
-
-        if (eclipse.a <= 0)
+        if (currentScene.name == "MainScene")
         {
-            isRevival = false;
-            //GetComponent<Player1>().enabled = true;
-            gameManager.SetActive(true);
+
+            mainPlayer.transform.position = new Vector3(144.9f, 4.95f, 113.5f);
+
+            takeObject.inventoryData.inventory.Clear();
+            takeObject.isTake = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            buttonRevival.SetActive(false);
+
+            eclipse -= new Color(0, 0, 0, Time.deltaTime * 0.3f);
+
+            deathImage.color = eclipse;
+
+            itemsIndecator[1].count.text = "100";
+            itemsIndecator[2].count.text = "100";
+
+            Destroy(takeObject.objInHand1);
+
+            Destroy(takeObject.objInHand2);
+
+            takeObject.objInHand1 = null;
+            takeObject.objInHand2 = null;
+
+            if (eclipse.a <= 0)
+            {
+                isRevival = false;
+                //GetComponent<Player1>().enabled = true;
+                gameManager.SetActive(true);
+            }
         }
-        
+
+        else
+        {
+
+        }
+
     }
 
 }
