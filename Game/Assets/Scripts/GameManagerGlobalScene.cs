@@ -17,7 +17,7 @@ public class GameManagerGlobalScene : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(PlayerPrefs.GetInt(PATH_LOAD_SCENE));
+        
         if (instance != null)
         {
             Destroy(gameObject);
@@ -32,23 +32,23 @@ public class GameManagerGlobalScene : MonoBehaviour
         {
             SceneManager.LoadScene(PlayerPrefs.GetString(PATH_CURRENT_SCENE));
             PlayerPrefs.SetInt(PATH_LOAD_SCENE, 0);
-            
-        }
 
+        }
+        lastVisitesScene = PlayerPrefs.GetString(PATH_LAST_VISITED_SCENE);
     }
 
     private void Start()
     {
         //DontDestroyOnLoad(gameObject);
 
-        lastVisitesScene = PlayerPrefs.GetString(PATH_LAST_VISITED_SCENE);
+        
 
     }
 
     private void Update()
     {
 
-        Debug.Log(PlayerPrefs.GetInt(PATH_LOAD_SCENE));
+        
         currentSceneName = SceneManager.GetActiveScene().name;
 
         Debug.Log(currentSceneName + " + " + lastVisitesScene);

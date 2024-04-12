@@ -9,6 +9,8 @@ public class IndecatorItem : MonoBehaviour
     [SerializeField] public TextMeshProUGUI count;
     [SerializeField] public Image image;
 
+    
+
     public IndecatorItem(string count)
     {
         this.count.text = count;

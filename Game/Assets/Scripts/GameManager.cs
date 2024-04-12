@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             instance = this;
         }
+
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

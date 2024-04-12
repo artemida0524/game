@@ -37,7 +37,16 @@ public class InventoryItem : MonoBehaviour
 
     private void Start()
     {
-        items = inventoryView.scriptableItemList.scriptableItems;
+        try
+        {
+            items = inventoryView.scriptableItemList.scriptableItems;
+        }
+        catch (Exception)
+        {
+
+            
+        }
+        
     }
 
 

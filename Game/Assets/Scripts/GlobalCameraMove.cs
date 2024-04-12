@@ -8,44 +8,20 @@ public class GlobalCameraMove : MonoBehaviour
 {
     private Rigidbody rigidbody;
     private Ray ray;
-    private Camera camera;
 
-    private GlobalSceneItem lastCheckComponent;
+    public bool isMove = true;
+    public bool isInteractable = true;
+
 
     private void Start()
     {
-        camera = GetComponent<Camera>();
         rigidbody = GetComponent<Rigidbody>();
     }
     private float speed = 10000f;
 
     void Update()
     {
-        Move();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.TryGetComponent<GlobalSceneItem>(out GlobalSceneItem component))
-                {
-                    Debug.Log("item");
-                    if (component.nameScene == GameManagerGlobalScene.lastVisitesScene)
-                    {
-                        component.canvasButton.SetActive(true);
-                        lastCheckComponent = component;
-                    }
-                    else
-                    {
-                        component.canvasGoingButton.SetActive(true);
-                    }
-                }
-                
-            }
-        }
-
+        if (isMove) Move();
     }
 
     private void Move()

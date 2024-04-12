@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class Player1 : MonoBehaviour
 {
+
+    public static Player1 Instance { get; private set; }
+
     private const int smoothFieldOfView = 40;
     [SerializeField] private Animator animator;
     [SerializeField] private InteractibleIndecator interactibleIndecator;
@@ -54,6 +57,20 @@ public class Player1 : MonoBehaviour
     private bool isGround = true;
     private bool isBoxing = false;
 
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            Instance = this;
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
 
     void Start()

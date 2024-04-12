@@ -26,7 +26,12 @@ public class BoxWithResource : MonoBehaviour
     [SerializeField] public string idPlayerPrefs = "";
 
     private static int id = 0;
+
+    private void Awake()
+    {
         
+    }
+
     private void Start()
     {
         if(idPlayerPrefs == "")
