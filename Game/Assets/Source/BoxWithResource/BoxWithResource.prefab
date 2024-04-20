@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameObj: []
   countObj: 
+  sizeBox: 15
   name: box3
   idPlayerPrefs: 
 --- !u!114 &8569864307220803149

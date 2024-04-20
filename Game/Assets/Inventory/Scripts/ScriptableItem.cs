@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -26,6 +27,7 @@ public class ScriptableItem : ScriptableObject
     public TypeObject typeObject;
     public FurnaceMode furnaceMode;
 
+    public int SizeBox;
     public int countObjectForMerger;
 
     public int secondFuseIfResource;

@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class ScriptableItemList : MonoBehaviour
 {
+    public static ScriptableItemList instance;
+
+
+    private void Awake()
+    {
+        instance = this;    
+    }
+
     [SerializeField] public ScriptableItem[] scriptableItems;
 }

@@ -29,12 +29,14 @@ public class BoxWithResource : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     private void Start()
     {
-        if(idPlayerPrefs == "")
+
+
+        if (idPlayerPrefs == "")
         {
             id++;
             idPlayerPrefs = $"box {id}";
@@ -50,17 +52,23 @@ public class BoxWithResource : MonoBehaviour
                 resource.Add(item.id, new ObjectData(item.count, item.id));
             }
         }
-        
 
-        if (nameObj.Length != 0 && countObj.Length != 0)
+
+        try
         {
-            if(nameObj.Length == countObj.Length)
+            if (nameObj.Length != 0 && countObj.Length != 0)
             {
-                for (int i = 0; i < nameObj.Length; i++)
+                if (nameObj.Length == countObj.Length)
                 {
-                    resource.Add(nameObj[i], new ObjectData(countObj[i], nameObj[i]));
+                    for (int i = 0; i < nameObj.Length; i++)
+                    {
+                        resource.Add(nameObj[i], new ObjectData(countObj[i], nameObj[i]));
+                    }
                 }
             }
+        }
+        catch (System.Exception)
+        {
         }
     }
     private void Update()

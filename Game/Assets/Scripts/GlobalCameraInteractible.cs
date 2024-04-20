@@ -29,16 +29,6 @@ public class GlobalCameraInteractible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        try
-        {
-            Debug.Log(lastCheckComponent.pointer.name + " + " + currentComponentSceneItem.pointer.name);
-
-        }
-        catch (Exception)
-        {
-
-        }
-
         if (Input.GetMouseButtonDown(0) && camera.GetComponent<GlobalCameraMove>().isInteractable)
         {
             ray = camera.ScreenPointToRay(Input.mousePosition);

@@ -6,8 +6,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using static UnityEditor.Progress;
-
 public class GameManager : MonoBehaviour
+
 {
     public static GameManager instance { get; private set; }
     
@@ -55,12 +55,12 @@ public class GameManager : MonoBehaviour
         }
 
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        bodySkeleton.SetActive(false);
+        bodySkeleton.SetActive(false);  
 
 
         items = inventoryView.scriptableItemList.scriptableItems;

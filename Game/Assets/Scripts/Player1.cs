@@ -1,11 +1,13 @@
 using Cinemachine;
 using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
-
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Player1 : MonoBehaviour
 {
@@ -61,32 +63,88 @@ public class Player1 : MonoBehaviour
     {
         if (Instance != null)
         {
-            Destroy(gameObject);
-            Instance = this;
+            Destroy(this.gameObject);
         }
         else
         {
             Instance = this;
         }
 
+
+
+
         DontDestroyOnLoad(gameObject);
+
+
+        animator = GetComponent<Animator>();
+
+    }
+
+    public static void SetPlaceInWorldPlayer()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "GlobalScene")
+        {
+            Instance.gameObject.SetActive(false);
+        }
+        else
+        {
+
+            Instance.gameObject.SetActive(true);
+
+        }
+
+
+        PlaceInTheWorld.Instance.SetPlace();
     }
 
 
+
+    private void OnEnable()
+    {
+        Debug.Log("OnEnabled");
+        SetAnimator();
+    }
     void Start()
     {
-        inventoryData = GetComponent<InventoryData>();
-        animator = GetComponent<Animator>();
+        isGround = true;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        animatorShark = shark.GetComponent<Animator>();
+
+        inventoryData = GetComponent<InventoryData>();
+
+
         currentCamera = cameraFrom1;
         takeObject = GetComponent<TakeObject>();
+
+
     }
 
+    public void SetAnimator()
+    {
+
+        isW = true;
+        isRun = true;
+        forTurnRight = true;
+        isGround = true;
+        isBoxing = false;
+
+
+        isGround = true;
+        horizontal = 0f;
+        vertical = 0f;
+    }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            animator.SetFloat("Vertical", 0);
+            animator.SetFloat("Horizontal", 0);
+            Debug.Log(animator.GetFloat("Vertical") + " " + animator.GetFloat("Horizontal"));
+        }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -153,7 +211,7 @@ public class Player1 : MonoBehaviour
         takeObject.isTake = false;
         inventroy.SetActive(false);
         this.objBuild = objBuild;
-        
+
     }
 
     private void SwitchCamera()
@@ -246,10 +304,10 @@ public class Player1 : MonoBehaviour
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
 
-        if (gameObject.transform.position.y <= -14.4f)
-        {
-            gameObject.transform.position = new Vector3(160.987f, 9.925f, 396.836f);
-        }
+        //if (gameObject.transform.position.y <= -14.4f)
+        //{
+        //    gameObject.transform.position = new Vector3(160.987f, 9.925f, 396.836f);
+        //}
 
         if (Input.GetMouseButtonDown(0) && isBoxing)
         {
@@ -460,7 +518,7 @@ public class Player1 : MonoBehaviour
             interactibleIndecator.itemsIndecator[0].count.text = $"{int.Parse(interactibleIndecator.itemsIndecator[0].count.text) - 3} ";
 
 
-        }   
+        }
         if (other.gameObject.name == "Waters")
         {
             isGround = false;

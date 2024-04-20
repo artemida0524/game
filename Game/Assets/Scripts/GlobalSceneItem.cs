@@ -22,6 +22,7 @@ public class GlobalSceneItem : MonoBehaviour
     public GameObject canvasButton;
     public GameObject pointer;
     [SerializeField] private GlobalCameraInteractible globalCameraInteractible;
+    
 
 
     public List<string> canFindList = new List<string>();

@@ -40,7 +40,7 @@ public class ControllerForBear : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(160.987f, 9.925f, 396.836f);
         }
-        Vector3 direction = mainCharacter.transform.position - transform.position;
+        Vector3 direction = Player1.Instance.transform.position - transform.position;
         float distance = direction.magnitude;
         
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;

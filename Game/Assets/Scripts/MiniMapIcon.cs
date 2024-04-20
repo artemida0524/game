@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class MiniMapIcon : MonoBehaviour
 {
-    [SerializeField] GameObject target;
-
-
     private void Update()
     {
-        transform.rotation = target.transform.rotation;
+        transform.rotation = InstanceMiniMapIcon.Instance.transform.rotation;
     }
 }
